@@ -9,23 +9,16 @@ namespace AmongUs.ModLoader
     [BepInProcess("Among Us.exe")]
     public class ModLoaderPlugin : BasePlugin
     {
-        private const string ModDirectory = "Mods";
         
         public override void Load()
         {
-            if (Directory.Exists(ModDirectory))
+            if (Directory.Exists(ModLoader.ModDirectory))
             {
                 //Only initialize if we have mods/need it
                 ModLoader.Initialize();
-
-                var dir = Directory.GetCurrentDirectory() + "/";
                 
-                foreach (var file in Directory.GetFiles(ModDirectory))
-                {
-                    if (!file.ToLower().EndsWith(".dll")) continue;
-                    
-                    ModLoader.LoadMod(Assembly.LoadFile(dir + file));
-                }
+                //Load mods asynchronously from each other but blocking the main thread during loading
+                ModLoader.LoadModsAsync(Directory.GetCurrentDirectory() + "/").GetAwaiter().GetResult();
             }
 
             var modCount = ModLoader.Mods.Count;

@@ -60,7 +60,7 @@
             <Private>False</Private>
         </Reference>
     </ItemGroup>
-
+    
     <Target Name="Copy" AfterTargets="Build">
         <ItemGroup>
             <OutputFiles Include="$(OutputPath)$(AssemblyName).dll" />
