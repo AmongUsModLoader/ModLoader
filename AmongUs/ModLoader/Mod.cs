@@ -13,7 +13,7 @@ namespace AmongUs.ModLoader
             Version = version;
         }
 
-        internal abstract void Load();
-        internal virtual bool Unload() => false;
+        public abstract void Load();
+        public virtual bool Unload() => false;
     }
 }
