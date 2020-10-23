@@ -18,11 +18,12 @@ namespace AmongUs.ModLoader
                 //Only initialize if we have mods/need it
                 ModLoader.Initialize();
 
-                var dir = Directory.GetCurrentDirectory() + "/" + ModDirectory + "/"; 
+                var dir = Directory.GetCurrentDirectory() + "/";
+                
                 foreach (var file in Directory.GetFiles(ModDirectory))
                 {
                     if (!file.ToLower().EndsWith(".dll")) continue;
-
+                    
                     ModLoader.LoadMod(Assembly.LoadFile(dir + file));
                 }
             }

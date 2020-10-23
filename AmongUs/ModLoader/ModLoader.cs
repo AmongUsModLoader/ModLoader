@@ -16,7 +16,7 @@ namespace AmongUs.ModLoader
     {
         public static readonly ManualLogSource Log = Logger.CreateLogSource("ModLoader");
         public static readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
-        private static readonly Harmony Harmony = new Harmony("among_us_modloader");
+        private static readonly Harmony Harmony = new Harmony("amongus.modloader");
 
         internal static void Initialize()
         {
