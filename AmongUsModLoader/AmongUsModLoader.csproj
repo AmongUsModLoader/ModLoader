@@ -5,6 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\BepInEx\unhollowed\Assembly-CSharp.dll</HintPath>
+        </Reference>
         <Reference Include="Assembly-CSharp-firstpass">
             <HintPath>../BepInEx/unhollowed/Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
