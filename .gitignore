@@ -1,4 +1,5 @@
 AmongUsModLoader/bin/
 AmongUsModLoader/obj/
+BepInEx/plugins/AmongUsModLoader.dll
 .idea
 .vscode
