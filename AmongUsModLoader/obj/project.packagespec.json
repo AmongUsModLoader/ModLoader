@@ -1,0 +1,31 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader.csproj",
+    "projectName": "AmongUsModLoader",
+    "projectPath": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader.csproj",
+    "outputPath": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "net471"
+    ],
+    "sources": {
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "net471": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "net471": {
+      "runtimeIdentifierGraphPath": "/usr/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.1": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.1": []
+  },
+  "packageFolders": {
+    "/home/georgek/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader.csproj",
+      "projectName": "AmongUsModLoader",
+      "projectPath": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader.csproj",
+      "packagesPath": "/home/georgek/.nuget/packages/",
+      "outputPath": "/run/media/georgek/Seagate/C#/AmongUsModLoader/AmongUsModLoader/AmongUsModLoader/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/georgek/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net471"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net471": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net471": {
+        "runtimeIdentifierGraphPath": "/usr/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
