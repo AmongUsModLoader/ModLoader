@@ -3,15 +3,19 @@ using System.IO;
 using System.Reflection;
 using BepInEx;
 using BepInEx.IL2CPP;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using Logger = BepInEx.Logging.Logger;
 
 namespace AmongUsModLoader
 {
     [BepInPlugin("AUSML", "Among Us ModLoader", "0.1")]
     [BepInProcess("Among Us.exe")]
-    public class AmongUsModLoaderPlugin : BasePlugin
-    {
+    public class AmongUsModLoaderPlugin : BasePlugin {
+        
         public override void Load() {
-            var modsFolder =  Directory.CreateDirectory(Config.ConfigFilePath + Path.DirectorySeparatorChar + "Mods");
+            var configDirectory = Directory.CreateDirectory(Config.ConfigFilePath);
+            var modsFolder = configDirectory.Root.CreateSubdirectory("Mods");
             
             foreach (var file in modsFolder.GetFiles()) {
                 if (file.Name.EndsWith(".dll")) {
@@ -26,7 +30,10 @@ namespace AmongUsModLoader
                 }
             }
             
-            //This is where we start to do stuff lol
+            Log.LogInfo("Mod Loader Loaded");
+            Log.LogInfo(SceneManager.GetSceneAt(0).name);
         }
+        
     }
+    
 }
