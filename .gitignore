@@ -1,5 +1,5 @@
-AmongUsModLoader/bin/
-AmongUsModLoader/obj/
+AmongUs/bin/
+AmongUs/obj/
 BepInEx/plugins/AmongUsModLoader.dll
 .idea
 .vscode

@@ -1,9 +1,6 @@
-using System;
-
-namespace AmongUsMod.Loader
+namespace AmongUs.ModLoader
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class Mod : Attribute
+    public abstract class Mod
     {
         public string ID { get; }
         public string Name { get; }
@@ -15,5 +12,8 @@ namespace AmongUsMod.Loader
             Name = name;
             Version = version;
         }
+
+        internal abstract void Load();
+        internal virtual bool Unload() => false;
     }
 }
