@@ -11,7 +11,7 @@ namespace AmongUs.ModLoader
 {
     public static class ModLoader
     {
-        public static readonly ManualLogSource Log = Logger.CreateLogSource("AmongUsModLoader");
+        public static readonly ManualLogSource Log = Logger.CreateLogSource("ModLoader");
         public static readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
         
         internal static void LoadMod(Assembly assembly)
