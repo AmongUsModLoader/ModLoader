@@ -14,8 +14,9 @@ namespace AmongUsModLoader
     public class AmongUsModLoaderPlugin : BasePlugin {
         
         public override void Load() {
+            Log.LogInfo("Mod loading start.");
             var configDirectory = Directory.CreateDirectory(Config.ConfigFilePath);
-            var modsFolder = configDirectory.Root.CreateSubdirectory("Mods");
+            var modsFolder = configDirectory.Parent.CreateSubdirectory("Mods");
             
             foreach (var file in modsFolder.GetFiles()) {
                 if (file.Name.EndsWith(".dll")) {
@@ -30,7 +31,7 @@ namespace AmongUsModLoader
                 }
             }
             
-            Log.LogInfo("Mod Loader Loaded");
+            Log.LogInfo("Mod Loader Loaded.");
             Log.LogInfo(SceneManager.GetSceneAt(0).name);
         }
         
