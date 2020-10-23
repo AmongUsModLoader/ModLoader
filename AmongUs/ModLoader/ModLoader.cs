@@ -5,7 +5,10 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using AmongUs.Api;
 using BepInEx.Logging;
+using HarmonyLib;
+using UnhollowerBaseLib.Runtime;
 
 namespace AmongUs.ModLoader
 {
@@ -13,6 +16,18 @@ namespace AmongUs.ModLoader
     {
         public static readonly ManualLogSource Log = Logger.CreateLogSource("ModLoader");
         public static readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
+        private static readonly Harmony Harmony = new Harmony("among_us_modloader");
+
+        internal static void Initialize()
+        {
+            UnityVersionHandler.Initialize(2019, 4, 9);
+            
+            //TODO improve this
+            typeof (Game).GetNestedTypes().Do(Harmony.PatchAll);
+            typeof (Language).GetNestedTypes().Do(Harmony.PatchAll);
+            typeof (MainMenu).GetNestedTypes().Do(Harmony.PatchAll);
+            Log.LogDebug("Initialized events");
+        }
         
         internal static void LoadMod(Assembly assembly)
         {

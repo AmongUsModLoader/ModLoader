@@ -15,6 +15,9 @@ namespace AmongUs.ModLoader
         {
             if (Directory.Exists(ModDirectory))
             {
+                //Only initialize if we have mods/need it
+                ModLoader.Initialize();
+                
                 foreach (var file in Directory.GetFiles(ModDirectory))
                 {
                     if (!file.ToLower().EndsWith(".dll")) continue;
