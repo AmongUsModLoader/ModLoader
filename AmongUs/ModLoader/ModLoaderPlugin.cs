@@ -8,7 +8,6 @@ namespace AmongUs.ModLoader
     [BepInProcess("Among Us.exe")]
     public class ModLoaderPlugin : BasePlugin
     {
-        
         public override void Load()
         {
             if (Directory.Exists(ModLoader.ModDirectory))
@@ -17,7 +16,7 @@ namespace AmongUs.ModLoader
                 ModLoader.Initialize();
                 
                 //Load mods asynchronously from each other but blocking the main thread during loading
-                ModLoader.LoadModsAsync(Directory.GetCurrentDirectory() + "/").GetAwaiter().GetResult();
+                ModLoader.LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
             }
 
             var modCount = ModLoader.Mods.Count;

@@ -20,12 +20,17 @@ namespace AmongUs.ModLoader
         internal static void Initialize()
         {
             UnityVersionHandler.Initialize(2019, 4, 9);
-            
+
             //TODO improve this
-            typeof (Game).GetNestedTypes().Do(Harmony.PatchAll);
-            typeof (Language).GetNestedTypes().Do(Harmony.PatchAll);
-            typeof (MainMenu).GetNestedTypes().Do(Harmony.PatchAll);
-            Log.LogDebug("Initialized events");
+            void AddPatchType(Type type)
+            {
+                type.GetNestedTypes().Do(Harmony.PatchAll);
+            }
+            
+            AddPatchType(typeof(Game));
+            AddPatchType(typeof(Language));
+            AddPatchType(typeof(MainMenu));
+            Log.LogDebug("Initialized Events.");
         }
 
         internal static async Task LoadModsAsync(string dir)
@@ -40,11 +45,11 @@ namespace AmongUs.ModLoader
 
         private static async Task LoadModAsync(Assembly assembly)
         {
-            using (var modInfo = assembly.GetManifestResourceStream("ModEntry"))
+            using (var entry = assembly.GetManifestResourceStream("ModEntry"))
             {
-                if (modInfo != null)
+                if (entry != null)
                 {
-                    var entryType = assembly.GetType(await new StreamReader(modInfo).ReadToEndAsync());
+                    var entryType = assembly.GetType(await new StreamReader(entry).ReadToEndAsync());
                     if (entryType == null || !typeof(Mod).IsAssignableFrom(entryType) ||
                         !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
 
