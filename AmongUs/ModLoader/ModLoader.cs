@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
@@ -38,15 +39,14 @@ namespace AmongUs.ModLoader
             foreach (var file in Directory.GetFiles(ModDirectory))
             {
                 if (!file.ToLower().EndsWith(".dll")) continue;
-                
+
                 await LoadModAsync(Assembly.LoadFile(dir + file));
             }
         }
 
         private static async Task LoadModAsync(Assembly assembly)
         {
-            System.Console.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
-            using (var entry = assembly.GetManifestResourceStream("ModEntry"))
+            using (var entry = assembly.GetManifestResourceStream(assembly.GetManifestResourceNames().First(resource => resource.EndsWith(".ModEntry.txt"))))
             {
                 if (entry != null)
                 {

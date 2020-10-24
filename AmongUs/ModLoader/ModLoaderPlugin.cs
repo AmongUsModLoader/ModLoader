@@ -20,7 +20,7 @@ namespace AmongUs.ModLoader
             }
 
             var modCount = ModLoader.Mods.Count;
-            Log.LogInfo($"ModLoader Initialized. {(modCount == 0 ? "No" : modCount.ToString())} mods have been loaded.");
+            Log.LogInfo($"ModLoader Initialized. {(modCount == 0 ? "No" : modCount.ToString())} {(modCount == 1 ? "mod has" : "mods have")} been loaded.");
         }
     }
 }
