@@ -45,6 +45,7 @@ namespace AmongUs.ModLoader
 
         private static async Task LoadModAsync(Assembly assembly)
         {
+            System.Console.WriteLine(string.Join(", ", assembly.GetManifestResourceNames()));
             using (var entry = assembly.GetManifestResourceStream("ModEntry"))
             {
                 if (entry != null)
