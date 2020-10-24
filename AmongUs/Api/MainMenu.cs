@@ -10,10 +10,7 @@ namespace AmongUs.Api {
 		[HarmonyPatch(new Type[0])]
 		internal static class GamePatch
 		{
-			public static void Postfix(MainMenuManager __instance)
-			{
-				ConstructionEvent?.Invoke(__instance);
-			}
+			public static void Postfix(MainMenuManager __instance) => ConstructionEvent?.Invoke(__instance);
 		}
 	}
 }

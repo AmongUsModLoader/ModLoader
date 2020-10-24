@@ -9,10 +9,7 @@ namespace AmongUs.Api {
 		[HarmonyPatch(typeof (LanguageSetter), "SetLanguage")]
 		internal static class GamePatch
 		{
-			public static void Postfix(ref LanguageButton __0)
-			{
-				ChangeEvent?.Invoke(__0); 
-			}
+			public static void Postfix(ref LanguageButton __0) => ChangeEvent?.Invoke(__0);
 		}
 	}
 }

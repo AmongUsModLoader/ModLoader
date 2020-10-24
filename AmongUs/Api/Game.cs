@@ -1,8 +1,5 @@
 using System;
-using BepInEx.Logging;
 using HarmonyLib;
-using InnerNet;
-using UnityEngine;
 
 namespace AmongUs.Api {
 	public static class Game
@@ -12,10 +9,7 @@ namespace AmongUs.Api {
 		[HarmonyPatch(typeof (GameStartManager), "Start")]
 		public static class GamePatch
 		{
-			public static void Postfix(GameStartManager __instance)
-			{
-				StartEvent?.Invoke(__instance);
-			}
+			public static void Postfix(GameStartManager __instance) => StartEvent?.Invoke(__instance);
 		}
 	}
 }

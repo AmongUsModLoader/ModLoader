@@ -1,6 +1,8 @@
 ﻿using System.IO;
+using System.Reflection;
 using BepInEx;
 using BepInEx.IL2CPP;
+using HarmonyLib;
 
 namespace AmongUs.ModLoader
 {
@@ -10,10 +12,12 @@ namespace AmongUs.ModLoader
     {
         public override void Load()
         {
+            ModLoader.InitializeLoaderEvents();
+            ModLoader.AddMod(new ModLoader());
+            
             if (Directory.Exists(ModLoader.ModDirectory))
             {
-                //Only initialize if we have mods/need it
-                ModLoader.Initialize();
+                ModLoader.InitializeModEvents();
                 
                 //Load mods asynchronously from each other but blocking the main thread during loading
                 ModLoader.LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
