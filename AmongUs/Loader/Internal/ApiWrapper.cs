@@ -1,6 +1,6 @@
 using AmongUs.Api;
 
-namespace AmongUs.ModLoader.Internal
+namespace AmongUs.Loader.Internal
 {
     public static class ApiWrapper
     {

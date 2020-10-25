@@ -5,22 +5,17 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
-using BepInEx;
-using HarmonyLib;
-using UnhollowerBaseLib.Runtime;
 
-namespace AmongUs.ModLoader
+namespace AmongUs.Loader
 {
     public class ModLoader : Mod
     {
-        private static readonly BepInPlugin LoaderInfo = typeof(ModLoaderPlugin).GetCustomAttribute<BepInPlugin>();
         public static readonly ModLoader Instance = new ModLoader();
         public const string ModDirectory = "Mods";
         
         public readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
-        private readonly Harmony _harmony = new Harmony("amongus.modloader");
 
-        private ModLoader() : base("ModLoader", LoaderInfo.Name, LoaderInfo.Version.ToString())
+        private ModLoader() : base("ModLoader", "Among Us ModLoader", "0.1")
         {
             if (Instance != null) throw new InvalidOperationException($"You can not create a new instance of {ID}.");
         }
@@ -31,28 +26,14 @@ namespace AmongUs.ModLoader
         }
 
         public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");
-
-        private void AddPatchType(Type type) => type.GetNestedTypes(BindingFlags.NonPublic).Do(_harmony.PatchAll);
-
-        internal void InitializeLoaderEvents()
-        {
-            UnityVersionHandler.Initialize(2019, 4, 9);
-            AddPatchType(typeof(MainMenu));
-        }
         
-        internal void InitializeModEvents()
-        {
-            //TODO improve this
-            AddPatchType(typeof(Game));
-            AddPatchType(typeof(Language));
-            Log.Write("Initialized Events.", LogLevel.Debug);
-        }
-
-        internal void AddMod(Mod mod)
+        public void AddMod(Mod mod)
         {
             mod.Load();
             Mods[mod.ID] = mod;
         }
+
+        public void LoadMods() => LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
         
         internal async Task LoadModsAsync(string dir)
         {

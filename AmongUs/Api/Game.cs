@@ -1,15 +1,10 @@
 using System;
-using HarmonyLib;
 
 namespace AmongUs.Api {
 	public static class Game
 	{
 		public static event Action<GameStartManager> StartEvent;
 
-		[HarmonyPatch(typeof (GameStartManager), "Start")]
-		private static class GamePatch
-		{
-			public static void Postfix(GameStartManager __instance) => StartEvent?.Invoke(__instance);
-		}
+		public static void Start(GameStartManager manager) => StartEvent?.Invoke(manager);
 	}
 }

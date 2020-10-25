@@ -1,6 +1,6 @@
 using AmongUs.Api;
 
-namespace AmongUs.ModLoader
+namespace AmongUs.Loader
 {
     public abstract class Mod
     {

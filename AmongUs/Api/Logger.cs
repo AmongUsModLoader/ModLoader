@@ -1,4 +1,4 @@
-using AmongUs.ModLoader.Internal;
+using AmongUs.Loader.Internal;
 
 namespace AmongUs.Api
 {
