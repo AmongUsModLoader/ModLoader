@@ -1,74 +1,72 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{4997969B-539D-4278-B8F3-030F845E707A}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>ModLoaderClient</RootNamespace>
-        <AssemblyName>ModLoaderClient</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="0Harmony, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\.local\share\Steam\steamapps\common\Among Us\BepInEx\core\0Harmony.dll</HintPath>
-        </Reference>
-        <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\.local\share\Steam\steamapps\common\Among Us\BepInEx\unhollowed\Assembly-CSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="BepInEx.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\.local\share\Steam\steamapps\common\Among Us\BepInEx\core\BepInEx.Core.dll</HintPath>
-        </Reference>
-        <Reference Include="BepInEx.IL2CPP, Version=6.0.0.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\.local\share\Steam\steamapps\common\Among Us\BepInEx\core\BepInEx.IL2CPP.dll</HintPath>
-        </Reference>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-        <Reference Include="UnhollowerBaseLib, Version=0.4.9.0, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\..\..\..\.local\share\Steam\steamapps\common\Among Us\BepInEx\core\UnhollowerBaseLib.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="ModLoaderPlugin.cs" />
-        <Compile Include="Patches.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\AmongUs\AmongUsModLoader.csproj">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+</PropertyGroup>
+
+<ItemGroup>
+    <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/core/BepInEx.Core.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/core/0Harmony.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx.IL2CPP">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/core/BepInEx.IL2CPP.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnhollowerBaseLib">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/core/UnhollowerBaseLib.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/Il2Cppmscorlib.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/Il2CppSystem.Core.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.CoreModule.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.IMGUIModule.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.PhysicsModule.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.TextRenderingModule.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+        <HintPath>$(AMONG_US_PATH)/BepInEx/unhollowed/UnityEngine.UI.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+
+    <ProjectReference Include="..\AmongUs\AmongUsModLoader.csproj">
         <Project>{a964fb9d-5276-4ae8-bf7c-a89f086ae692}</Project>
         <Name>AmongUsModLoader</Name>
-      </ProjectReference>
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
+    </ProjectReference>
+</ItemGroup>
 
+<Target Name="Copy" AfterTargets="Build">
+    <ItemGroup>
+        <OutputFiles Include="$(OutputPath)$(AssemblyName).dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(AMONG_US_PATH)/BepInEx/plugins/" Condition="'$(Configuration)' == 'Debug'" />
+</Target>
 </Project>
