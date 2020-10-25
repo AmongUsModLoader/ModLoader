@@ -9,7 +9,7 @@ using UnhollowerBaseLib.Runtime;
 
 namespace AmongUs.Client.Loader
 {
-    [BepInPlugin("AUSML", "Among Us ModLoader", "0.1")]
+    [BepInPlugin("ModLoader", "Among Us ModLoader", "0.1")]
     [BepInProcess("Among Us.exe")]
     public class ModLoaderPlugin : BasePlugin
     {
@@ -32,12 +32,12 @@ namespace AmongUs.Client.Loader
         private void InitializeLoaderEvents()
         {
             UnityVersionHandler.Initialize(2019, 4, 9);
-            AddPatchType(typeof(ModPatches));
+            AddPatchType(typeof(LoaderPatches));
         }
         
         private void InitializeModEvents()
         {
-            AddPatchType(typeof(LoaderPatches));
+            AddPatchType(typeof(ModPatches));
             Log.LogDebug("Initialized Events.");
         }
     }
