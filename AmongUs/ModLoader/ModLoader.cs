@@ -45,7 +45,7 @@ namespace AmongUs.ModLoader
             //TODO improve this
             AddPatchType(typeof(Game));
             AddPatchType(typeof(Language));
-            Log.LogDebug("Initialized Events.");
+            Log.Write("Initialized Events.", LogLevel.Debug);
         }
 
         internal void AddMod(Mod mod)
@@ -80,7 +80,7 @@ namespace AmongUs.ModLoader
                             !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
 
                         AddMod(mod);
-                        Log.LogDebug($"{mod.Name}({mod.ID}) has been loaded.");
+                        Log.Write($"{mod.Name}({mod.ID}) has been loaded.", LogLevel.Debug);
                     }
                 }
             }

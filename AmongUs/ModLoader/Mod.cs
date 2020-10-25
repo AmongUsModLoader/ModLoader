@@ -1,4 +1,4 @@
-using BepInEx.Logging;
+using AmongUs.Api;
 
 namespace AmongUs.ModLoader
 {
@@ -8,14 +8,14 @@ namespace AmongUs.ModLoader
         public string Name { get; }
         public string Version { get; }
 
-        public ManualLogSource Log;
+        public readonly ILogger Log;
         
         public Mod(string id, string name, string version)
         {
             ID = id;
             Name = name;
             Version = version;
-            Log = Logger.CreateLogSource(Name);
+            Log = Logger.Create(name);
         }
 
         public abstract void Load();
