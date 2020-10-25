@@ -8,7 +8,7 @@ namespace AmongUs.ModLoader
         public string Name { get; }
         public string Version { get; }
 
-        protected ManualLogSource Log;
+        public ManualLogSource Log;
         
         public Mod(string id, string name, string version)
         {

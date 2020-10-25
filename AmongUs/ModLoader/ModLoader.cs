@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
 using BepInEx;
-using BepInEx.Logging;
 using HarmonyLib;
 using UnhollowerBaseLib.Runtime;
 
@@ -14,43 +13,48 @@ namespace AmongUs.ModLoader
 {
     public class ModLoader : Mod
     {
-        public static readonly ManualLogSource Log = Logger.CreateLogSource("ModLoader");
-        public static readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
-        public static readonly Harmony Harmony = new Harmony("amongus.modloader");
-        public const string ModDirectory = "Mods";
         private static readonly BepInPlugin LoaderInfo = typeof(ModLoaderPlugin).GetCustomAttribute<BepInPlugin>();
+        public static readonly ModLoader Instance = new ModLoader();
+        public const string ModDirectory = "Mods";
+        
+        public readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
+        private readonly Harmony _harmony = new Harmony("amongus.modloader");
 
-        public ModLoader() : base("ModLoader", LoaderInfo.Name, LoaderInfo.Version.ToString()) {}
+        private ModLoader() : base("ModLoader", LoaderInfo.Name, LoaderInfo.Version.ToString())
+        {
+            if (Instance != null) throw new InvalidOperationException($"You can not create a new instance of {ID}.");
+        }
 
         public override void Load()
         {
-            VersionString.ShowEvent += shower => shower.text.Text += ", ModLoader v" + LoaderInfo.Version;
+            MainMenu.VersionShowEvent += shower => shower.text.Text += $", ${ID} v{Version}";
         }
-        
-        internal static void AddPatchType(Type type) => type.GetNestedTypes().Do(Harmony.PatchAll);
 
-        internal static void InitializeLoaderEvents()
+        public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");
+
+        private void AddPatchType(Type type) => type.GetNestedTypes().Do(_harmony.PatchAll);
+
+        internal void InitializeLoaderEvents()
         {
             UnityVersionHandler.Initialize(2019, 4, 9);
-            AddPatchType(typeof(VersionString));
+            AddPatchType(typeof(MainMenu));
         }
         
-        internal static void InitializeModEvents()
+        internal void InitializeModEvents()
         {
             //TODO improve this
             AddPatchType(typeof(Game));
             AddPatchType(typeof(Language));
-            AddPatchType(typeof(MainMenu));
             Log.LogDebug("Initialized Events.");
         }
 
-        internal static void AddMod(Mod mod)
+        internal void AddMod(Mod mod)
         {
             mod.Load();
             Mods[mod.ID] = mod;
         }
         
-        internal static async Task LoadModsAsync(string dir)
+        internal async Task LoadModsAsync(string dir)
         {
             foreach (var file in Directory.GetFiles(ModDirectory))
             {
@@ -60,18 +64,24 @@ namespace AmongUs.ModLoader
             }
         }
 
-        private static async Task LoadModAsync(Assembly assembly)
+        private async Task LoadModAsync(Assembly assembly)
         {
-            using (var entry = assembly.GetManifestResourceStream(assembly.GetManifestResourceNames().First(resource => resource.EndsWith(".ModEntry.txt"))))
+            var firstEntryName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(resource => resource.EndsWith(".ModEntry.txt"));
+            
+            if (firstEntryName != null)
             {
-                if (entry != null)
+                using (var entry = assembly.GetManifestResourceStream(firstEntryName))
                 {
-                    var entryType = assembly.GetType(await new StreamReader(entry).ReadToEndAsync());
-                    if (entryType == null || !typeof(Mod).IsAssignableFrom(entryType) ||
-                        !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
-                    
-                    AddMod(mod);
-                    Log.LogDebug($"{mod.Name}({mod.ID}) has been loaded.");
+                    if (entry != null)
+                    {
+                        var entryType = assembly.GetType(await new StreamReader(entry).ReadToEndAsync());
+                        if (entryType == null || !typeof(Mod).IsAssignableFrom(entryType) ||
+                            !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
+
+                        AddMod(mod);
+                        Log.LogDebug($"{mod.Name}({mod.ID}) has been loaded.");
+                    }
                 }
             }
         }
