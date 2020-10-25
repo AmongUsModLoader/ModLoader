@@ -27,12 +27,12 @@ namespace AmongUs.ModLoader
 
         public override void Load()
         {
-            MainMenu.VersionShowEvent += shower => shower.text.Text += $", ${ID} v{Version}";
+            MainMenu.VersionShowEvent += shower => shower.text.Text += $", {ID} v{Version}";
         }
 
         public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");
 
-        private void AddPatchType(Type type) => type.GetNestedTypes().Do(_harmony.PatchAll);
+        private void AddPatchType(Type type) => type.GetNestedTypes(BindingFlags.NonPublic).Do(_harmony.PatchAll);
 
         internal void InitializeLoaderEvents()
         {
