@@ -33,9 +33,17 @@ namespace AmongUs.Loader
             Mods[mod.ID] = mod;
         }
 
-        public void LoadMods() => LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
-        
-        internal async Task LoadModsAsync(string dir)
+        public void LoadMods()
+        {
+            LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
+            var modCount = Mods.Count - 1;
+            Log.Write(
+                $"ModLoader Initialized. {(modCount == 0 ? "No" : modCount.ToString())} " +
+                $"{(modCount == 1 ? "mod has" : "mods have")} been found and loaded."
+            );
+        }
+
+        private async Task LoadModsAsync(string dir)
         {
             foreach (var file in Directory.GetFiles(ModDirectory))
             {

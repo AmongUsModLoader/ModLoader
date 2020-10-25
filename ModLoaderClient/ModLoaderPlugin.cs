@@ -21,17 +21,10 @@ namespace AmongUs.Client.Loader
             InitializeLoaderEvents();
             loader.AddMod(loader);
 
-            if (Directory.Exists(ModLoader.ModDirectory))
-            {
-                InitializeModEvents();
-                loader.LoadMods();
-            }
-
-            var modCount = loader.Mods.Count - 1;
-            Log.LogInfo(
-                $"ModLoader Initialized. {(modCount == 0 ? "No" : modCount.ToString())} " +
-                $"{(modCount == 1 ? "mod has" : "mods have")} been found and loaded."
-            );
+            if (!Directory.Exists(ModLoader.ModDirectory)) return;
+            
+            InitializeModEvents();
+            loader.LoadMods();
         }
         
         private void AddPatchType(Type type) => type.GetNestedTypes(BindingFlags.NonPublic).Do(_harmony.PatchAll);
