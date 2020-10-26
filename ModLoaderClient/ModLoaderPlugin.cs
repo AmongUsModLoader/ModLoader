@@ -22,11 +22,6 @@ namespace AmongUs.Client.Loader
             ApiWrapper.Instance = new ClientApiWrapper();
         }
 
-        private static void print(MainMenuManager __instance)
-        {
-            System.Console.WriteLine("TEST");
-        }
-        
         public override void Load()
         {
             var loader = ModLoader.Instance;

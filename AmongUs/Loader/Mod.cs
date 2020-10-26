@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using AmongUs.Api;
 
 namespace AmongUs.Loader
@@ -46,6 +50,19 @@ namespace AmongUs.Loader
         
         private bool _clientRequires;
         private ModSide _side;
+        private Assembly _underlyingAssembly;
+
+        internal Assembly UnderlyingAssembly
+        {
+            get => _underlyingAssembly;
+            set
+            {
+                _underlyingAssembly = value;
+                _resourceNames = value.GetManifestResourceNames().ToDictionary(source => source.Substring(source.IndexOf(".", StringComparison.Ordinal) + 1));
+            }
+        }
+        
+        private Dictionary<string, string> _resourceNames;
 
         public Mod(string id, string name, string version)
         {
@@ -57,5 +74,12 @@ namespace AmongUs.Loader
 
         public abstract void Load();
         public virtual bool Unload() => false;
+
+        public Stream GetResource(string name)
+        {
+            if (name == null) return null;
+            var key = "Resources." + name.Replace("/", ".");
+            return !_resourceNames.ContainsKey(key) ? null : UnderlyingAssembly.GetManifestResourceStream(_resourceNames[key]);
+        }
     }
 }
