@@ -55,6 +55,7 @@ namespace AmongUs.Loader
 
         internal Dictionary<string, Dictionary<string, string>> LanguageKeys { get; } = new Dictionary<string, Dictionary<string, string>>();
 
+        private readonly Dictionary<string, string> _resourceCache = new Dictionary<string, string>();
         private Dictionary<string, string> _resourceNames;
 
         public Mod(string id, string name, string version)
@@ -74,9 +75,9 @@ namespace AmongUs.Loader
             _resourceNames = assembly.GetManifestResourceNames().ToDictionary(source => source.Substring(source.IndexOf(".", StringComparison.Ordinal) + 1));
             
             var language = 
-                from resource in _resourceNames.Keys 
-                where resource.StartsWith("Resources.Language.")
-                select (resource.Replace("Resources.Language.", "").Replace(".txt", ""), assembly.GetManifestResourceStream(resource));
+                from resource in _resourceNames.Keys where resource.StartsWith("Resources.Language.")
+                let name = resource.Replace("Resources.Language.", "").Replace(".txt", "")
+                select (name, GetResource("Language/" + name + ".txt"));
             
             foreach (var (key, stream) in language)
             {
@@ -98,8 +99,11 @@ namespace AmongUs.Loader
         public Stream GetResource(string name)
         {
             if (name == null) return null;
+            if (_resourceCache.ContainsKey(name)) return _assembly.GetManifestResourceStream(_resourceCache[name]);
             var key = "Resources." + name.Replace("/", ".");
-            return !_resourceNames.ContainsKey(key) ? null : _assembly.GetManifestResourceStream(_resourceNames[key]);
+            var resourceName = _resourceNames.ContainsKey(key) ? _resourceNames[key] : null;
+            if (resourceName != null) _resourceCache[name] = resourceName;
+            return resourceName == null ? null : _assembly.GetManifestResourceStream(resourceName);
         }
     }
 }
