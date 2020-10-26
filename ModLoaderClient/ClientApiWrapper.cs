@@ -12,8 +12,8 @@ namespace AmongUs.Client.Loader
         private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
         internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
 
-        public string Language => ModLoaderPlugin._options.EKMHEKKICFL.HFHEGBIOKNE.ToString();
-        
+        public string Language => (ModLoaderPlugin._options?.EKMHEKKICFL?.HFHEGBIOKNE ?? KPOBLKLMOLL.English).ToString();
+
         public ILogger CreateLogger(string name) => new ClientLogger(name);
 
         public void RegisterTask(TaskType type) => TaskTypes[type] = ++_lastTaskId;

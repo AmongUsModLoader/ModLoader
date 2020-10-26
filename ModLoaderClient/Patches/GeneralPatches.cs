@@ -1,4 +1,5 @@
 using AmongUs.Api;
+using AmongUs.Client.Loader.Api;
 using HarmonyLib;
 
 namespace AmongUs.Client.Loader
