@@ -12,7 +12,7 @@ namespace AmongUs.Client.Loader
         }
         
         [HarmonyPatch(typeof (LanguageSetter), "SetLanguage")]
-        private static class GamePatch
+        private static class LanguageSetPatch
         {
             public static void Postfix(ref LanguageButton __0) => Language.Change(__0);
         }

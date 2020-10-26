@@ -18,7 +18,6 @@ namespace AmongUs.Loader
         private ModLoader() : base("ModLoader", "Among Us ModLoader", "0.1")
         {
             if (Instance != null) throw new InvalidOperationException($"You can not create a new instance of {ID}.");
-            ClientRequires = true;
             Side = ModSide.Common;
         }
 
