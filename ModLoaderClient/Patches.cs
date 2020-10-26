@@ -8,7 +8,26 @@ namespace AmongUs.Client.Loader
         [HarmonyPatch(typeof(GameStartManager), "Start")]
         private static class GameStartPatch
         {
-            public static void Postfix(GameStartManager __instance) => Game.Start(__instance);
+            public static void Postfix(GameStartManager __instance) => GameLobby.Start(__instance);
+        }
+        
+        [HarmonyPatch(typeof(GameStartManager), "SetStartCounter")]
+        private static class StartCountDownPatch
+        {
+            public static void Postfix(GameStartManager __instance, sbyte HOPFNGJCCPN) => GameLobby.SetStartCounterPost(__instance, HOPFNGJCCPN);
+            public static void Prefix(GameStartManager __instance, sbyte HOPFNGJCCPN) => GameLobby.SetStartCounterPre(__instance, HOPFNGJCCPN);
+        }
+        
+        [HarmonyPatch(typeof(GameStartManager), "Update")]
+        private static class LobbyUpdatePatch
+        {
+            public static void Postfix(GameStartManager __instance) => GameLobby.Update(__instance);
+        }
+        
+        [HarmonyPatch(typeof(GameStartManager), "MakePublic")]
+        private static class MakePublicPatch
+        {
+            public static void Postfix(GameStartManager __instance) => GameLobby.MakePublic(__instance);
         }
 
         [HarmonyPatch(typeof(LanguageSetter), "SetLanguage")]

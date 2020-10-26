@@ -6,6 +6,7 @@ using AmongUs.Loader;
 using AmongUs.Loader.Internal;
 using BepInEx;
 using BepInEx.IL2CPP;
+using BepInEx.IL2CPP.UnityEngine;
 using HarmonyLib;
 using UnhollowerBaseLib.Runtime;
 using UnhollowerRuntimeLib;
