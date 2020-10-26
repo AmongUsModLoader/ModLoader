@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using AmongUs.Client.Loader.Patches;
 using AmongUs.Loader;
 using AmongUs.Loader.Internal;
 using BepInEx;
@@ -56,6 +57,8 @@ namespace AmongUs.Client.Loader
             SceneManager.add_sceneLoaded(action);
             
             AddPatchType(typeof(ModPatches));
+            AddPatchType(typeof(GameStartManagerPatches));
+            
             Log.LogDebug("Initialized Events.");
             await loader.LoadModsAsync();
             var modCount = loader.Mods.Count - 1;
