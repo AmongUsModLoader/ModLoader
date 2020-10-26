@@ -8,14 +8,32 @@ namespace AmongUs.Client.Loader
         [HarmonyPatch(typeof(GameStartManager), "Start")]
         private static class GameStartPatch
         {
-            public static void Postfix(GameStartManager __instance) => GameLobby.Start(__instance);
+            public static void Postfix(GameStartManager __instance) {
+                System.Console.WriteLine("asdfasdfasdf");
+                __instance.MinPlayers = 0;
+                GameLobby.Start(__instance);
+            }
         }
         
-        [HarmonyPatch(typeof(GameStartManager), "SetStartCounter")]
-        private static class StartCountDownPatch
+        [HarmonyPatch(typeof(GameStartManager), "BeginGame")]
+        private static class GameBeginPatch
         {
-            public static void Postfix(GameStartManager __instance, sbyte HOPFNGJCCPN) => GameLobby.SetStartCounterPost(__instance, HOPFNGJCCPN);
+            //Called when the start button is pressed. Even if there arent enough players
+            public static void Postfix(GameStartManager __instance) => GameLobby.TryStart(__instance);
+        }
+        
+        [HarmonyPatch(typeof(GameStartManager), "ReallyBegin")]
+        private static class ReallyBeginPatch
+        {
+            //Called when the start button is pressed. Only if enough players
+            public static void Postfix(GameStartManager __instance, bool IGOMGMBEDDI) => GameLobby.GameStarting(__instance, IGOMGMBEDDI);
+        }
+
+        [HarmonyPatch(typeof(GameStartManager), "SetStartCounter")]
+        private static class StartCountDownPatch {
             public static void Prefix(GameStartManager __instance, sbyte HOPFNGJCCPN) => GameLobby.SetStartCounterPre(__instance, HOPFNGJCCPN);
+            
+            public static void Postfix(GameStartManager __instance, sbyte HOPFNGJCCPN) => GameLobby.SetStartCounterPost(__instance, HOPFNGJCCPN);
         }
         
         [HarmonyPatch(typeof(GameStartManager), "Update")]
