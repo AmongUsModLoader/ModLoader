@@ -19,7 +19,6 @@ namespace AmongUs.Loader
         {
             if (Instance != null) throw new InvalidOperationException($"You can not create a new instance of {ID}.");
             Side = ModSide.Common;
-            UnderlyingAssembly = GetType().Assembly;
         }
 
         public override void Load()
@@ -29,8 +28,9 @@ namespace AmongUs.Loader
 
         public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");
         
-        public void AddMod(Mod mod)
+        public void AddMod(Mod mod, Assembly assembly)
         {
+            mod.UnderlyingAssembly = assembly;
             mod.Load();
             Mods[mod.ID] = mod;
         }
@@ -70,8 +70,7 @@ namespace AmongUs.Loader
                         if (entryType == null || !typeof(Mod).IsAssignableFrom(entryType) ||
                             !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
 
-                        mod.UnderlyingAssembly = assembly;
-                        AddMod(mod);
+                        AddMod(mod, assembly);
                         Log.Write($"{mod.Name}({mod.ID}) has been loaded.", LogLevel.Debug);
                     }
                 }

@@ -28,7 +28,7 @@ namespace AmongUs.Client.Loader
             UnityVersionHandler.Initialize(2019, 4, 9);
 
             AddPatchType(typeof(LoaderPatches));
-            loader.AddMod(loader);
+            loader.AddMod(loader, loader.GetType().Assembly);
 
             if (!Directory.Exists(ModLoader.ModDirectory)) return;
             
