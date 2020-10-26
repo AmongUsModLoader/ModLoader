@@ -8,7 +8,10 @@ using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using UnhollowerBaseLib.Runtime;
+using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace AmongUs.Client.Loader
 {
@@ -29,10 +32,10 @@ namespace AmongUs.Client.Loader
         {
             UnityVersionHandler.Initialize(2019, 4, 9);
             ModLoader.Instance.IsClient = true;
-            StartLoading().GetAwaiter().GetResult();
+            StartLoadingAsync().GetAwaiter().GetResult();
         }
 
-        private async Task StartLoading()
+        private async Task StartLoadingAsync()
         {
             var loader = ModLoader.Instance;
             AddPatchType(typeof(LoaderPatches));
@@ -40,6 +43,17 @@ namespace AmongUs.Client.Loader
 
             if (!Directory.Exists(ModLoader.ModDirectory)) return;
 
+            ClassInjector.RegisterTypeInIl2Cpp<ModLoaderUnityComponent>();
+            UnityAction<Scene, LoadSceneMode> action = null;
+            action = (Action<Scene, LoadSceneMode>) ((scene, loadMode) =>
+            {
+                SceneManager.remove_sceneLoaded(action);
+                var gameObject = new GameObject(nameof (ModLoaderPlugin));
+                gameObject.AddComponent<ModLoaderUnityComponent>();
+                UnityEngine.Object.DontDestroyOnLoad(gameObject);
+            });
+            SceneManager.add_sceneLoaded(action);
+            
             AddPatchType(typeof(ModPatches));
             Log.LogDebug("Initialized Events.");
             await loader.LoadModsAsync();

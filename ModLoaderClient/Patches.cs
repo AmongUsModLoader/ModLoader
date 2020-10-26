@@ -1,6 +1,5 @@
 using AmongUs.Api;
 using HarmonyLib;
-using UnityEngine;
 
 namespace AmongUs.Client.Loader
 {
@@ -19,50 +18,9 @@ namespace AmongUs.Client.Loader
         }
 
         [HarmonyPatch(typeof(MeetingHud), "Update")]
-        public static class MeetingHugUpdatePatch
+        private static class MeetingHudUpdatePatch
         {
             public static void Postfix(MeetingHud __instance) => VotingScreen.Update(__instance);
-        }
-
-        //TODO WIP stuff
-        [HarmonyPatch(typeof(LanguageSetter), "Start")]
-        private static class LanguageStartPatch
-        {
-            //Called the first time you open the language settings.
-            public static void Postfix(LanguageSetter __instance)
-            {
-                //Print out all the language types
-                foreach (var va in __instance.DNHOHIBJNGO)
-                {
-                    System.Console.WriteLine(va.Title.Text);
-                }
-            }
-        }
-
-        internal static class PetBuyablePatch
-        {
-            [HarmonyPatch(typeof(PetBehaviour), "get_NGBJPFEEOOP")]
-            private static class MenuConstructorPatch
-            {
-                public static void Postfix(PetBehaviour __instance, ref string __result)
-                {
-                    System.Console.WriteLine(__result);
-
-                }
-            }
-        }
-
-        internal static class StoreMenuPatch
-        {
-            [HarmonyPatch(typeof(StoreMenu), "ProcessPurchase")]
-            private static class MenuConstructorPatch
-            {
-                public static void Postfix(PetBehaviour __instance, ref string __result)
-                {
-                    System.Console.WriteLine(__result);
-                }
-            }
-
         }
     }
 
