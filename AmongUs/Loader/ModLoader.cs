@@ -12,8 +12,9 @@ namespace AmongUs.Loader
     {
         public static readonly ModLoader Instance = new ModLoader();
         public const string ModDirectory = "Mods";
-        
-        public readonly Dictionary<string, Mod> Mods = new Dictionary<string, Mod>();
+
+        public Dictionary<string, Mod> Mods { get; } = new Dictionary<string, Mod>();
+        public bool IsClient { get; set; }
 
         private ModLoader() : base("ModLoader", "Among Us ModLoader", "0.1")
         {
@@ -28,25 +29,16 @@ namespace AmongUs.Loader
 
         public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");
         
-        public void AddMod(Mod mod, Assembly assembly)
+        public async Task AddMod(Mod mod, Assembly assembly)
         {
-            mod.UnderlyingAssembly = assembly;
+            await mod.SetUnderlyingAssembly(assembly);
             mod.Load();
             Mods[mod.ID] = mod;
         }
 
-        public void LoadMods()
+        public async Task LoadModsAsync()
         {
-            LoadModsAsync(Directory.GetCurrentDirectory() + "\\").GetAwaiter().GetResult();
-            var modCount = Mods.Count - 1;
-            Log.Write(
-                $"ModLoader Initialized. {(modCount == 0 ? "No" : modCount.ToString())} " +
-                $"{(modCount == 1 ? "mod has" : "mods have")} been found and loaded."
-            );
-        }
-
-        private async Task LoadModsAsync(string dir)
-        {
+            var dir = Directory.GetCurrentDirectory() + "\\";
             foreach (var file in Directory.GetFiles(ModDirectory))
             {
                 if (!file.ToLower().EndsWith(".dll")) continue;
@@ -70,7 +62,7 @@ namespace AmongUs.Loader
                         if (entryType == null || !typeof(Mod).IsAssignableFrom(entryType) ||
                             !(entryType.GetConstructor(new Type[0])?.Invoke(new object[0]) is Mod mod)) return;
 
-                        AddMod(mod, assembly);
+                        await AddMod(mod, assembly);
                         Log.Write($"{mod.Name}({mod.ID}) has been loaded.", LogLevel.Debug);
                     }
                 }

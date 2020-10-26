@@ -9,6 +9,8 @@ namespace AmongUs.Loader.Internal
     
     public interface IApiWrapper
     {
+        string Language { get; }
+
         ILogger CreateLogger(string name);
         void RegisterTask(TaskType type);
     }

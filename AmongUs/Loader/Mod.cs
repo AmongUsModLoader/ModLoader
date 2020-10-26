@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using AmongUs.Api;
 
 namespace AmongUs.Loader
@@ -50,18 +51,10 @@ namespace AmongUs.Loader
         
         private bool _clientRequires;
         private ModSide _side;
-        private Assembly _underlyingAssembly;
+        private Assembly _assembly;
 
-        internal Assembly UnderlyingAssembly
-        {
-            get => _underlyingAssembly;
-            set
-            {
-                _underlyingAssembly = value;
-                _resourceNames = value.GetManifestResourceNames().ToDictionary(source => source.Substring(source.IndexOf(".", StringComparison.Ordinal) + 1));
-            }
-        }
-        
+        internal Dictionary<string, Dictionary<string, string>> LanguageKeys { get; } = new Dictionary<string, Dictionary<string, string>>();
+
         private Dictionary<string, string> _resourceNames;
 
         public Mod(string id, string name, string version)
@@ -75,11 +68,30 @@ namespace AmongUs.Loader
         public abstract void Load();
         public virtual bool Unload() => false;
 
+        internal async Task SetUnderlyingAssembly(Assembly assembly)
+        {
+            _assembly = assembly;
+            _resourceNames = assembly.GetManifestResourceNames().ToDictionary(source => source.Substring(source.IndexOf(".", StringComparison.Ordinal) + 1));
+            var language = from resource in _resourceNames.Keys where resource.StartsWith("Resources.Language.") select (resource.Replace("Resources.Language.", ""), GetResource(resource));
+            foreach (var (key, stream) in language)
+            {
+                var dictionary = new Dictionary<string, string>();
+                var reader = new StreamReader(stream);
+                foreach (var languageKey in (await reader.ReadToEndAsync()).Split('\n'))
+                {
+                    var pair = languageKey.Split('=');
+                    dictionary[pair[0]] = pair[1];
+                }
+
+                LanguageKeys[key] = dictionary;
+            }
+        }
+        
         public Stream GetResource(string name)
         {
             if (name == null) return null;
             var key = "Resources." + name.Replace("/", ".");
-            return !_resourceNames.ContainsKey(key) ? null : UnderlyingAssembly.GetManifestResourceStream(_resourceNames[key]);
+            return !_resourceNames.ContainsKey(key) ? null : _assembly.GetManifestResourceStream(_resourceNames[key]);
         }
     }
 }
