@@ -74,7 +74,7 @@
             <Name>AmongUsModLoader</Name>
         </ProjectReference>
     </ItemGroup>
-
+    
     <Target Name="Copy" AfterTargets="Build">
         <ItemGroup>
             <OutputFiles Include="$(OutputPath)AmongUsModLoader.dll" />

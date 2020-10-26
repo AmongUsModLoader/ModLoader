@@ -72,7 +72,12 @@ namespace AmongUs.Loader
         {
             _assembly = assembly;
             _resourceNames = assembly.GetManifestResourceNames().ToDictionary(source => source.Substring(source.IndexOf(".", StringComparison.Ordinal) + 1));
-            var language = from resource in _resourceNames.Keys where resource.StartsWith("Resources.Language.") select (resource.Replace("Resources.Language.", ""), GetResource(resource));
+            
+            var language = 
+                from resource in _resourceNames.Keys 
+                where resource.StartsWith("Resources.Language.")
+                select (resource.Replace("Resources.Language.", "").Replace(".txt", ""), assembly.GetManifestResourceStream(resource));
+            
             foreach (var (key, stream) in language)
             {
                 var dictionary = new Dictionary<string, string>();
@@ -80,7 +85,10 @@ namespace AmongUs.Loader
                 foreach (var languageKey in (await reader.ReadToEndAsync()).Split('\n'))
                 {
                     var pair = languageKey.Split('=');
-                    dictionary[pair[0]] = pair[1];
+                    if (pair.Length >= 2)
+                    {
+                        dictionary[pair[0]] = pair[1];
+                    }
                 }
 
                 LanguageKeys[key] = dictionary;
