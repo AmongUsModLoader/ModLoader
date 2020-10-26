@@ -8,11 +8,8 @@ namespace AmongUs.Client.Loader
         [HarmonyPatch(typeof(GameStartManager), "Start")]
         private static class GameStartPatch
         {
-            public static void Postfix(GameStartManager __instance) {
-                System.Console.WriteLine("asdfasdfasdf");
-                __instance.MinPlayers = 0;
-                GameLobby.Start(__instance);
-            }
+            public static void Postfix(GameStartManager __instance) => GameLobby.Start(__instance);
+            
         }
         
         [HarmonyPatch(typeof(GameStartManager), "BeginGame")]
