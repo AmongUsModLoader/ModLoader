@@ -26,6 +26,7 @@ namespace AmongUs.Client.Loader
         {
             var loader = ModLoader.Instance;
             UnityVersionHandler.Initialize(2019, 4, 9);
+
             AddPatchType(typeof(LoaderPatches));
             loader.AddMod(loader);
 

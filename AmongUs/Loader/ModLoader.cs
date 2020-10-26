@@ -57,7 +57,7 @@ namespace AmongUs.Loader
         private async Task LoadModAsync(Assembly assembly)
         {
             var firstEntryName = assembly.GetManifestResourceNames()
-                .FirstOrDefault(resource => resource.EndsWith(".ModEntry.txt"));
+                .FirstOrDefault(resource => resource.EndsWith(".Resources.ModEntry.txt"));
             
             if (firstEntryName != null)
             {

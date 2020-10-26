@@ -33,14 +33,18 @@ namespace AmongUs.Client.Loader
 
     internal static class LoaderPatches
     {
-        [HarmonyPatch(typeof(MainMenuManager), "LPCEHACMAPB")]
-        private static class MenuConstructorPatch
+        [HarmonyPatch(typeof(MainMenuManager), "Start")]
+        private static class MenuStartPatch
         {
+<<<<<<< HEAD
             public static void Postfix(MainMenuManager __instance) {
                 MainMenu.Instance = __instance;
                 //Best way to debug, obviously
                 System.Console.WriteLine("TEST");
             }
+=======
+            public static void Postfix(MainMenuManager __instance) => MainMenu.ShowMenu(__instance);
+>>>>>>> 6581ab8b62d76bee204707dc7d8b2986ae49d6f9
         }
 
         [HarmonyPatch(typeof(VersionShower), "Start")]
