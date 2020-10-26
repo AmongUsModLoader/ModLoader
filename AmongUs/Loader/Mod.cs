@@ -13,6 +13,7 @@ namespace AmongUs.Loader
         public string ID { get; }
         public string Name { get; }
         public string Version { get; }
+        public virtual string Description { get; }
 
         public bool ClientRequires
         {
