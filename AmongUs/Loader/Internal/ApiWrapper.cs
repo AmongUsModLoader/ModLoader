@@ -10,5 +10,6 @@ namespace AmongUs.Loader.Internal
     public interface IApiWrapper
     {
         ILogger CreateLogger(string name);
+        void RegisterTask(TaskType type);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AmongUs.Api;
 using AmongUs.Loader.Internal;
 using BepInEx.Logging;
@@ -8,15 +9,21 @@ namespace AmongUs.Client.Loader
 {
     public class ClientApiWrapper : IApiWrapper
     {
+        private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
+        internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
+
         public ILogger CreateLogger(string name) => new ClientLogger(name);
-        
+
+        public void RegisterTask(TaskType type) => TaskTypes[type] = ++_lastTaskId;
+
         private class ClientLogger : ILogger
         {
             private readonly ManualLogSource _manualLog;
 
             public ClientLogger(string name) => _manualLog = Logger.CreateLogSource(name);
 
-            public void Write(object message, LogLevel level = LogLevel.Info) => _manualLog.Log((BepInEx.Logging.LogLevel) level, message);
+            public void Write(object message, LogLevel level = LogLevel.Info) =>
+                _manualLog.Log((BepInEx.Logging.LogLevel) level, message);
         }
     }
 }
