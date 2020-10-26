@@ -22,10 +22,16 @@ namespace AmongUs.Client.Loader
             ApiWrapper.Instance = new ClientApiWrapper();
         }
 
+        private static void print(MainMenuManager __instance)
+        {
+            System.Console.WriteLine("TEST");
+        }
+        
         public override void Load()
         {
             var loader = ModLoader.Instance;
             UnityVersionHandler.Initialize(2019, 4, 9);
+
             AddPatchType(typeof(LoaderPatches));
             loader.AddMod(loader);
 
