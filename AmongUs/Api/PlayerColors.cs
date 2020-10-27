@@ -10,6 +10,6 @@ namespace AmongUs.Api
 
         public static bool SetAvailableColors(PlayerTab tab) => SetAvailableColorsEvent?.Invoke(tab) != false;
         public static bool SelectColor(int color) => SelectColorEvent?.Invoke(color) != false;
-        public static bool TrySetColor(PlayerControl tab, int color) => TrySetColorEvent?.Invoke(tab, color) != false;
+        public static bool TrySetColor(PlayerControl control, int color) => TrySetColorEvent?.Invoke(control, color) != false;
     }
 }

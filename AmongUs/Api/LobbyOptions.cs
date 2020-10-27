@@ -1,12 +1,15 @@
 using System.Text;
 
-namespace AmongUs.Api {
-	
-	//For the GameOptionsData class
-	public class LobbyOptions {
+namespace AmongUs.Api
+{
 
-		
-		public interface ILobbyOptions {
+	//For the GameOptionsData class
+	public class LobbyOptions
+	{
+
+
+		public interface ILobbyOptions
+		{
 			/*string[] MapNames { get; }
 			float[] KillDistances { get; }
 			string[] KillDistanceStrings { get; }*/

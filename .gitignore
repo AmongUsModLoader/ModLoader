@@ -2,6 +2,4 @@
 */obj/
 .idea
 .vscode
-Among Us
-.user
-AmongUsModLoader.sln.DotSettings.user
+*user

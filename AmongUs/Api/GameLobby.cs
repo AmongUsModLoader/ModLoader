@@ -1,6 +1,7 @@
 using System;
 
-namespace AmongUs.Api {
+namespace AmongUs.Api 
+{
 	public static class GameLobby
 	{
 		public static event Action<IGameLobby> LobbyLoadEvent;
