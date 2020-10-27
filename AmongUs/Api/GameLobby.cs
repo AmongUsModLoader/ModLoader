@@ -1,9 +1,9 @@
 using System;
 
 namespace AmongUs.Api {
-	public static class GameLobby
+	public static class GameLobbyEvents
 	{
-		public static event Action<GameStartManager> LobbyLoadEvent;
+		public static event Action<IGameLobby> LobbyLoadEvent;
 		public static event Action<GameStartManager, float?> SetStartCounterEventPost;
 		public static event Action<GameStartManager, float?> SetStartCounterEventPre;
 		public static event Action<GameStartManager> UpdateEvent;
@@ -17,9 +17,9 @@ namespace AmongUs.Api {
 		/// </summary>
 		public static event Action<GameStartManager, bool> GameStartingEvent;
 
-
+		
 		//"Load", this is when the lobby loads, not when the game starts
-		public static void Start(GameStartManager manager) => LobbyLoadEvent?.Invoke(manager);
+		public static void Start(IGameLobby manager) => LobbyLoadEvent?.Invoke(manager);
 		
 		public static void SetStartCounterPost(GameStartManager manager, float value) => SetStartCounterEventPost?.Invoke(manager, value);
 		
@@ -33,5 +33,10 @@ namespace AmongUs.Api {
 
 		public static void GameStarting(GameStartManager manager, bool b) => GameStartingEvent?.Invoke(manager, b);
 
+	}
+
+	public interface IGameLobby {
+		float CountDownTimer { get; set; }
+		
 	}
 }
