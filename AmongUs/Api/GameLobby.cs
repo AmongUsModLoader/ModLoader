@@ -37,5 +37,14 @@ namespace AmongUs.Api {
 	public interface IGameLobby 
 	{
 		float CountDownTimer { get; set; }
+		int MinPlayers { get; set; }
+		int LastPlayerCount { get; set; }
+		StartingState StartState { get; set; }
+	}
+
+	public enum StartingState {
+		NotStarting = 0,
+		Countdown = 1,
+		Starting = 2
 	}
 }
