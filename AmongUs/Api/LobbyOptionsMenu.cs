@@ -1,4 +1,6 @@
 namespace AmongUs.Api {
+	
+	//GameOptionsMenu
 	public class LobbyOptionsMenu {
 		
 		
