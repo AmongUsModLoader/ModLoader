@@ -32,11 +32,10 @@ namespace AmongUs.Api {
 		public static void TryStart(GameStartManager manager) => TryStartEvent?.Invoke(manager);
 
 		public static void GameStarting(GameStartManager manager, bool b) => GameStartingEvent?.Invoke(manager, b);
-
 	}
 
-	public interface IGameLobby {
+	public interface IGameLobby 
+	{
 		float CountDownTimer { get; set; }
-		
 	}
 }

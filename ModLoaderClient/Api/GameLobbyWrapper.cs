@@ -13,6 +13,6 @@ namespace AmongUs.Client.Loader.Api
 			set => Original.AKLOKGOIKHP = value;
 		}
 		
-		public GameLobbyWrapper(GameStartManager og) => Original = og;
+		public GameLobbyWrapper(GameStartManager original) => Original = original;
 	}
 }
