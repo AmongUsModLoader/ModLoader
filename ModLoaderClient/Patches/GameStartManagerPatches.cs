@@ -18,7 +18,6 @@ namespace AmongUs.Client.Loader.Patches
 		[HarmonyPatch(typeof(GameStartManager), "BeginGame")]
 		private static class GameBeginPatch
 		{
-			//Called when the start button is pressed. Even if there arent enough players
 			public static void Postfix(GameStartManager __instance) =>
 				GameLobby.TryStart(new GameLobbyWrapper(__instance));
 		}
@@ -26,7 +25,6 @@ namespace AmongUs.Client.Loader.Patches
 		[HarmonyPatch(typeof(GameStartManager), "ReallyBegin")]
 		private static class ReallyBeginPatch
 		{
-			//Called when the start button is pressed. Only if enough players
 			public static void Postfix(GameStartManager __instance, [HarmonyArgument(0)] bool neverShow) =>
 				GameLobby.GameStarting(new GameLobbyWrapper(__instance), neverShow);
 		}

@@ -9,11 +9,15 @@ using BepInEx;
 using BepInEx.IL2CPP;
 using BepInEx.IL2CPP.UnityEngine;
 using HarmonyLib;
+using UnhollowerBaseLib;
 using UnhollowerBaseLib.Runtime;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using FieldInfo = Il2CppSystem.Reflection.FieldInfo;
+using Object = UnityEngine.Object;
 
 namespace AmongUs.Client.Loader
 {
@@ -46,7 +50,10 @@ namespace AmongUs.Client.Loader
             if (!Directory.Exists(ModLoader.ModDirectory)) return;
 
             //TODO this feels really bad/hacky
+            //It is. But it be like that
             ClassInjector.RegisterTypeInIl2Cpp<ModLoaderUnityComponent>();
+            // ClassInjector.RegisterTypeInIl2Cpp<ModsButton>();
+
             UnityAction<Scene, LoadSceneMode> action = null;
             action = (Action<Scene, LoadSceneMode>) ((scene, loadMode) =>
             {
@@ -80,6 +87,62 @@ namespace AmongUs.Client.Loader
             {
                 //TODO this.. doesn't seem to work lol
                 _options = GetComponent<GameOptionsMenu>();
+                System.Console.WriteLine("GDSFSDF");
+               // System.Console.WriteLine( GetComponentInParent<GameOptionsMenu>().name);
+
+               //TODO someone plez unhorrify this 
+               // GameObject.FindObjectOfType<>()
+               var button = GameObject.Find("HowToPlayButton");
+               var buttonManager = GameObject.Find("PassiveButtonManager");
+               // var manager = GameObject.Find("MainMenuManager");
+               // button.GetComponent<PassiveButton>();
+               System.Console.WriteLine(button.name);
+
+               // TextTranslator.
+               
+               var gameObject = new GameObject(nameof(Button));
+               gameObject.AddComponent<PassiveButton>();
+               gameObject.AddComponent<ButtonRolloverHandler>();
+               
+               UnityAction action = null;
+               action = (Action) (() =>
+               {
+                  System.Console.WriteLine(" finally this god damn button works");
+               });
+               
+               gameObject.GetComponent<PassiveButton>().OnClick.AddListener(action);
+
+               gameObject.name = "GamerButton";
+               UnityEngine.Object.DontDestroyOnLoad(gameObject);
+               
+               System.Console.WriteLine(button.layer + " " + button.transform.position.x + " " + button.transform.position.y +  " " +button.transform.position.z);
+               System.Console.WriteLine(gameObject.layer + " " + gameObject.transform.position.x + " " + gameObject.transform.position.y +  " " +gameObject.transform.position.z);
+
+               /*Object[] components = GameObject.FindObjectsOfType<Object>();
+               foreach (var VARIABLE in components) {
+                   System.Console.WriteLine(VARIABLE.name + " : " + VARIABLE.GetType().Name);
+               }*/
+
+               foreach(var pp in button.GetComponents<Component>()) {
+                   CopyComponent(pp, gameObject);
+                   System.Console.WriteLine(pp.name + " : a" );
+               }
+               
+               gameObject.transform.position = new Vector3(3, -2.45f, 0);
+               buttonManager.GetComponent<PassiveButtonManager>().RegisterOne(gameObject.GetComponent<PassiveButton>());
+
+            }
+            
+            T CopyComponent<T>(T original, GameObject destination) where T : Component
+            {
+                Il2CppSystem.Type type = original.GetIl2CppType();
+                Component copy = destination.AddComponent(type);
+                Il2CppReferenceArray<FieldInfo> fields = type.GetFields(Il2CppSystem.Reflection.BindingFlags.Default);
+                foreach (FieldInfo field in fields)
+                {
+                    field.SetValue(copy, field.GetValue(original));
+                }
+                return copy as T;
             }
         }
     }

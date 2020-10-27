@@ -1,5 +1,6 @@
 using AmongUs.Api;
 using HarmonyLib;
+using UnityEngine;
 
 namespace AmongUs.Client.Loader
 {
@@ -16,6 +17,16 @@ namespace AmongUs.Client.Loader
         {
             public static void Postfix(MeetingHud __instance) => VotingScreen.Update(__instance);
         }
+        
+        
+        /*[HarmonyPatch(typeof(PlayerControl), "SetSkinImage")]
+        [HarmonyPatch(new []{ typeof(uint), typeof(SpriteRenderer)})]
+        private static class HackyPatchy
+        {
+            public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] SkinData a,[HarmonyArgument(1)] SpriteRenderer b) {
+                System.Console.WriteLine("Ooga booga");
+            }
+        }*/
     }
 
     internal static class LoaderPatches
