@@ -45,20 +45,22 @@ namespace AmongUs.Client.Loader
 
             if (!Directory.Exists(ModLoader.ModDirectory)) return;
 
+            //TODO this feels really bad/hacky
             ClassInjector.RegisterTypeInIl2Cpp<ModLoaderUnityComponent>();
             UnityAction<Scene, LoadSceneMode> action = null;
             action = (Action<Scene, LoadSceneMode>) ((scene, loadMode) =>
             {
                 SceneManager.remove_sceneLoaded(action);
-                var gameObject = new GameObject(nameof (ModLoaderPlugin));
+                var gameObject = new GameObject(nameof(ModLoaderPlugin));
                 gameObject.AddComponent<ModLoaderUnityComponent>();
                 UnityEngine.Object.DontDestroyOnLoad(gameObject);
             });
             SceneManager.add_sceneLoaded(action);
-            
+            //
+
             AddPatchType(typeof(ModPatches));
             AddPatchType(typeof(GameStartManagerPatches));
-            
+
             Log.LogDebug("Initialized Events.");
             await loader.LoadModsAsync();
             var modCount = loader.Mods.Count - 1;
@@ -69,13 +71,14 @@ namespace AmongUs.Client.Loader
         }
 
         private void AddPatchType(Type type) => type.GetNestedTypes(BindingFlags.NonPublic).Do(_harmony.PatchAll);
-        
+
         public class ModLoaderUnityComponent : MonoBehaviour
         {
             public ModLoaderUnityComponent(IntPtr ptr) : base(ptr) {}
 
-            private void Start() {
-                
+            private void Start()
+            {
+                //TODO this.. doesn't seem to work lol
                 _options = GetComponent<GameOptionsMenu>();
             }
         }

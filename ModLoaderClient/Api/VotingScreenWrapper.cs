@@ -6,7 +6,7 @@ namespace AmongUs.Client.Loader.Api
     public readonly struct VotingScreenWrapper : IVotingScreen
     {
         private MeetingHud Original { get; }
-        
+
         public string TitleText
         {
             get => Original.TitleText.Text;
@@ -22,7 +22,7 @@ namespace AmongUs.Client.Loader.Api
             }
             set => Original.BEDJEPCINAI = new UnityEngine.Vector3(value.X, value.Y, value.Z);
         }
-        
+
         public Vector3 VotePosition
         {
             get
@@ -32,7 +32,7 @@ namespace AmongUs.Client.Loader.Api
             }
             set => Original.VoteOrigin = new UnityEngine.Vector3(value.X, value.Y, value.Z);
         }
-        
+
         public Vector3 VoteButtonSize
         {
             get
@@ -42,7 +42,7 @@ namespace AmongUs.Client.Loader.Api
             }
             set => Original.VoteButtonOffsets = new UnityEngine.Vector3(value.X, value.Y, value.Z);
         }
-        
+
         public PlayerVoteArea SkipVoteButton
         {
             get => Original.SkipVoteButton;
@@ -56,7 +56,7 @@ namespace AmongUs.Client.Loader.Api
         }
 
         //public GameData.IHEKEPMDGIJ ExiledPlayer { get; set; }
-        
+
         public bool Tied
         {
             get => Original.CEIGAJCFLEM;

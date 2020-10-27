@@ -12,6 +12,7 @@ namespace AmongUs.Client.Loader
         private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
         internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
 
+        //TODO probably need a better way to do this, mainly one that doesn't fuck up the object lifetimes
         public string Language => (ModLoaderPlugin._options?.EKMHEKKICFL?.HFHEGBIOKNE ?? KPOBLKLMOLL.English).ToString();
 
         public ILogger CreateLogger(string name) => new ClientLogger(name);

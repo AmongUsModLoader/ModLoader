@@ -22,14 +22,14 @@ namespace AmongUs.Client.Loader.Patches {
 		private static class ReallyBeginPatch
 		{
 			//Called when the start button is pressed. Only if enough players
-			public static void Postfix(GameStartManager __instance, [HarmonyArgument(0)] bool canStart) => GameLobby.GameStarting(new GameLobbyWrapper(__instance), canStart);
+			public static void Postfix(GameStartManager __instance, [HarmonyArgument(0)] bool neverShow) => GameLobby.GameStarting(new GameLobbyWrapper(__instance), neverShow);
 		}
 
 		[HarmonyPatch(typeof(GameStartManager), "SetStartCounter")]
 		private static class StartCountDownPatch {
-			public static void Prefix(GameStartManager __instance, [HarmonyArgument(0)] sbyte value) => GameLobby.SetStartCounterPre(new GameLobbyWrapper(__instance), value);
+			public static void Prefix(GameStartManager __instance, [HarmonyArgument(0)] sbyte seconds) => GameLobby.SetStartCounterPre(new GameLobbyWrapper(__instance), seconds);
             
-			public static void Postfix(GameStartManager __instance, [HarmonyArgument(0)] sbyte value) => GameLobby.SetStartCounterPost(new GameLobbyWrapper(__instance), value);
+			public static void Postfix(GameStartManager __instance, [HarmonyArgument(0)] sbyte seconds) => GameLobby.SetStartCounterPost(new GameLobbyWrapper(__instance), seconds);
 		}
         
 		[HarmonyPatch(typeof(GameStartManager), "Update")]

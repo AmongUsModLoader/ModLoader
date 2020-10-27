@@ -1,6 +1,5 @@
 using AmongUs.Api;
 using HarmonyLib;
-using UnityEngine;
 
 namespace ModLoaderClient.Patches
 {

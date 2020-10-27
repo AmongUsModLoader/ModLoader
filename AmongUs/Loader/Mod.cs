@@ -58,6 +58,7 @@ namespace AmongUs.Loader
         internal Dictionary<string, Dictionary<string, string>> LanguageKeys { get; } = new Dictionary<string, Dictionary<string, string>>();
 
         private readonly Dictionary<string, string> _resourceCache = new Dictionary<string, string>();
+        private readonly HashSet<string> _unknownResources = new HashSet<string>();
         private Dictionary<string, string> _resourceNames;
 
         public Mod(string id, string name, string version)
@@ -97,14 +98,19 @@ namespace AmongUs.Loader
                 LanguageKeys[key] = dictionary;
             }
         }
-        
+
         public Stream GetResource(string name)
         {
             if (name == null) return null;
             if (_resourceCache.ContainsKey(name)) return _assembly.GetManifestResourceStream(_resourceCache[name]);
+            if (_unknownResources.Contains(name)) return null;
+
             var key = "Resources." + name.Replace("/", ".");
             var resourceName = _resourceNames.ContainsKey(key) ? _resourceNames[key] : null;
-            if (resourceName != null) _resourceCache[name] = resourceName;
+            
+            if (resourceName == null) _unknownResources.Add(name);
+            else _resourceCache[name] = resourceName;
+            
             return resourceName == null ? null : _assembly.GetManifestResourceStream(resourceName);
         }
     }

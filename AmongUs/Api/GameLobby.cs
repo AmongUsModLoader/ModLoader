@@ -21,9 +21,9 @@ namespace AmongUs.Api {
 		//"Load", this is when the lobby loads, not when the game starts
 		public static void Start(IGameLobby manager) => LobbyLoadEvent?.Invoke(manager);
 		
-		public static void SetStartCounterPost(IGameLobby manager, float value) => SetStartCounterEventPost?.Invoke(manager, value);
+		public static void SetStartCounterPost(IGameLobby manager, float seconds) => SetStartCounterEventPost?.Invoke(manager, seconds);
 		
-		public static void SetStartCounterPre(IGameLobby manager, float value) => SetStartCounterEventPre?.Invoke(manager, value);
+		public static void SetStartCounterPre(IGameLobby manager, float seconds) => SetStartCounterEventPre?.Invoke(manager, seconds);
 
 		public static void Update(IGameLobby manager) => UpdateEvent?.Invoke(manager);
 		
@@ -31,7 +31,7 @@ namespace AmongUs.Api {
 
 		public static void TryStart(IGameLobby manager) => TryStartEvent?.Invoke(manager);
 
-		public static void GameStarting(IGameLobby manager, bool b) => GameStartingEvent?.Invoke(manager, b);
+		public static void GameStarting(IGameLobby manager, bool neverShow) => GameStartingEvent?.Invoke(manager, neverShow);
 	}
 
 	public interface IGameLobby 
@@ -47,8 +47,8 @@ namespace AmongUs.Api {
 	}
 
 	public enum StartingState {
-		NotStarting = 0,
-		Countdown = 1,
-		Starting = 2
+		NotStarting,
+		Countdown,
+		Starting
 	}
 }
