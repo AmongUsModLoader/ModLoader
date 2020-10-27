@@ -40,6 +40,10 @@ namespace AmongUs.Api {
 		int MinPlayers { get; set; }
 		int LastPlayerCount { get; set; }
 		StartingState StartState { get; set; }
+		string GameStartText { get; set; }
+		string GameRoomName { get; set; }
+		string PlayerCounter { get; set; }
+		void ResetStartState();
 	}
 
 	public enum StartingState {

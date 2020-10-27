@@ -6,7 +6,6 @@ namespace AmongUs.Client.Loader.Api
 	{
 		private GameStartManager Original { get; }
 
-		
 		public float CountDownTimer 
 		{
 			get => Original.AKLOKGOIKHP;
@@ -27,7 +26,26 @@ namespace AmongUs.Client.Loader.Api
 			get => (StartingState)(int)Original.FEFLPKBHACE;
 			set => Original.FEFLPKBHACE = (GameStartManager.PNMJGJHIGIN)value;
 		}
-		
+
+		public string GameStartText {
+			get => Original.GameStartText.Text;
+			set => Original.GameStartText.Text = value;
+		}
+
+		public string GameRoomName {
+			get => Original.GameRoomName.Text;
+			set => Original.GameRoomName.Text = value;
+		}
+
+		public string PlayerCounter {
+			get => Original.PlayerCounter.Text;
+			set => Original.PlayerCounter.Text = value;
+		}
+
+		public void ResetStartState() {
+			Original.ResetStartState();
+		}
+
 		public GameLobbyWrapper(GameStartManager original) => Original = original;
 	}
 }
