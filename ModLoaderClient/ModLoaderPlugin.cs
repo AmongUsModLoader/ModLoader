@@ -130,7 +130,6 @@ namespace AmongUs.Client.Loader
                
                gameObject.transform.position = new Vector3(3, -2.45f, 0);
                buttonManager.GetComponent<PassiveButtonManager>().RegisterOne(gameObject.GetComponent<PassiveButton>());
-
             }
             
             T CopyComponent<T>(T original, GameObject destination) where T : Component

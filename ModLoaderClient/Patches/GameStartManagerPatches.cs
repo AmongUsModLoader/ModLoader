@@ -46,6 +46,7 @@ namespace AmongUs.Client.Loader.Patches
 				GameLobby.Update(new GameLobbyWrapper(__instance));
 		}
 
+		//TODO this patch doesnt work sad emoji
 		[HarmonyPatch(typeof(GameStartManager), "MakePublic")]
 		private static class MakePublicPatch
 		{

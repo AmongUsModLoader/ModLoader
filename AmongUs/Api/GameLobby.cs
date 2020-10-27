@@ -4,10 +4,25 @@ namespace AmongUs.Api
 {
 	public static class GameLobby
 	{
+		/// <summary>
+		/// Called when the client player loads into a lobby. (Only executes on the client)
+		/// </summary>
 		public static event Action<IGameLobby> LobbyLoadEvent;
+		/// <summary>
+		/// Post of when the start counter is set
+		/// </summary>
 		public static event Action<IGameLobby, float?> SetStartCounterEventPost;
+		/// <summary>
+		/// Pre of when the start counter is set
+		/// </summary>
 		public static event Action<IGameLobby, float?> SetStartCounterEventPre;
+		/// <summary>
+		/// Update loop of the game lobby
+		/// </summary>
 		public static event Action<IGameLobby> UpdateEvent;
+		/// <summary>
+		/// Called when the game is set from Private to Public
+		/// </summary>
 		public static event Action<IGameLobby> MakePublicEvent;
 		/// <summary>
 		/// Called when the game tries the start. EX: Start button is pressed
@@ -17,6 +32,9 @@ namespace AmongUs.Api
 		/// Called when the game tries the start while meeting player requirements.
 		/// </summary>
 		public static event Action<IGameLobby, bool> GameStartingEvent;
+		
+		public static event Action<IGameLobby, PlayerControl, IDisconnectReason> PlayerDisconnectedEvent;
+		public static event Action<IGameLobby> DisconnectEvent;
 
 		
 		//"Load", this is when the lobby loads, not when the game starts
