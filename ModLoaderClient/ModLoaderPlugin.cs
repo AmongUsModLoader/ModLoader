@@ -74,7 +74,10 @@ namespace AmongUs.Client.Loader
         {
             public ModLoaderUnityComponent(IntPtr ptr) : base(ptr) {}
 
-            private void Start() => _options = GetComponent<GameOptionsMenu>();
+            private void Start() {
+                
+                _options = GetComponent<GameOptionsMenu>();
+            }
         }
     }
 }
