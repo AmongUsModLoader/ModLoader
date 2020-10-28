@@ -1,15 +1,10 @@
-using AmongUs.Loader.Internal;
+using System.Collections.Generic;
+using AmongUs.Api.Registry;
 
 namespace AmongUs.Api
 {
-    public class TaskType
+    public class TaskType : RegistryObject
     {
-        public string Name { get; }
-        
-        public TaskType(string name)
-        {
-            Name = name;
-            ApiWrapper.Instance.RegisterTask(this);
-        }
+        public static readonly Dictionary<RegistryKey, TaskType> Registry = new Dictionary<RegistryKey, TaskType>();
     }
 }

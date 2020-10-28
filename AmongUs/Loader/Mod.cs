@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
+using AmongUs.Api.Registry;
 
 namespace AmongUs.Loader
 {
@@ -69,7 +70,7 @@ namespace AmongUs.Loader
             Log = Logger.Create(name);
         }
 
-        public abstract void Load();
+        public abstract void Load(RegistrarProvider registrar);
         public virtual bool Unload() => false;
 
         internal async Task SetUnderlyingAssembly(Assembly assembly)

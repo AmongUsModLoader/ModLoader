@@ -3,18 +3,17 @@ using AmongUs.Api;
 namespace AmongUs.Client.Loader.Api
 {
 
-	public readonly struct GameOptionsMenuWrapper : LobbyOptionsMenu.ILobbyMenu
+	public readonly struct GameOptionsMenuWrapper : ILobbyMenu
 	{
-
 		private GameOptionsMenu Original { get; }
 
-		public LobbyOptions.ILobbyOptions CachedData
+		public ILobbyOptions CachedData
 		{
 			get => new GameOptionsDataWrapper(Original.EKMHEKKICFL);
 			set => TransferData(value);
 		}
 
-		private void TransferData(LobbyOptions.ILobbyOptions options)
+		private void TransferData(ILobbyOptions options)
 		{
 			var data = Original.EKMHEKKICFL;
 			data.HNEKLLKCJOJ = options.KillCooldown;

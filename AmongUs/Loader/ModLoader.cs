@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
+using AmongUs.Api.Registry;
 
 namespace AmongUs.Loader
 {
@@ -24,7 +25,7 @@ namespace AmongUs.Loader
             Side = ModSide.Common;
         }
 
-        public override void Load()
+        public override void Load(RegistrarProvider registrar)
         {
             MainMenu.VersionShowEvent += text => $"{text}, {ID} v{Version}\nMods: {Mods.Count}";
         }
@@ -34,7 +35,7 @@ namespace AmongUs.Loader
         public async Task AddMod(Mod mod, Assembly assembly)
         {
             await mod.SetUnderlyingAssembly(assembly);
-            mod.Load();
+            mod.Load(new RegistrarProvider(mod.ID));
             Mods[mod.ID] = mod;
         }
 

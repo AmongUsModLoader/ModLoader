@@ -2,17 +2,13 @@ using AmongUs.Api;
 
 namespace AmongUs.Loader.Internal
 {
-    public static class ApiWrapper
+    public abstract class ApiWrapper
     {
-        public static IApiWrapper Instance { get; set; }
-    }
-    
-    public interface IApiWrapper
-    {
-        [Side(ModSide.Client)]
-        string Language { get; }
+        public static ApiWrapper Instance { get; set; }
 
-        ILogger CreateLogger(string name);
-        void RegisterTask(TaskType type);
+        [Side(ModSide.Client)]
+        public abstract string Language { get; }
+
+        public abstract ILogger CreateLogger(string name);
     }
 }

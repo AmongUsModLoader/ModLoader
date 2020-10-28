@@ -3,7 +3,7 @@ using AmongUs.Api;
 
 namespace AmongUs.Client.Loader.Api
 {
-	public readonly struct GameOptionsDataWrapper : LobbyOptions.ILobbyOptions
+	public readonly struct GameOptionsDataWrapper : ILobbyOptions
 	{
 
 		private OPIJAMILNFD Original { get; }

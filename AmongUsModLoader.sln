@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs", "AmongUs\AmongUs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Client.Loader", "AmongUs.Client.Loader\AmongUs.Client.Loader.csproj", "{4997969B-539D-4278-B8F3-030F845E707A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Server.Loader", "AmongUs.Server.Loader\AmongUs.Server.Loader.csproj", "{B9FE56F5-17B4-4148-BBA0-16EE15E68234}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{4997969B-539D-4278-B8F3-030F845E707A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4997969B-539D-4278-B8F3-030F845E707A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4997969B-539D-4278-B8F3-030F845E707A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

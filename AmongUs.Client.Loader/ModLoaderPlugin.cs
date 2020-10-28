@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using AmongUs.Api;
+using AmongUs.Api.Registry;
 using AmongUs.Client.Loader.Patches;
 using AmongUs.Loader;
 using AmongUs.Loader.Internal;
 using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
+using Il2CppSystem.Linq;
+using UnhollowerBaseLib;
 using UnhollowerBaseLib.Runtime;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -23,10 +28,12 @@ namespace AmongUs.Client.Loader
     {
         internal static GameOptionsMenu _options;
         private readonly Harmony _harmony = new Harmony("amongus.modloader");
+        private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
+        internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
 
         static ModLoaderPlugin()
         {
-            Assembly.LoadFile(Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\AmongUsModLoader.dll");
+            Assembly.LoadFile(Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\AmongUs.dll");
             ApiWrapper.Instance = new ClientApiWrapper();
         }
 
@@ -34,7 +41,49 @@ namespace AmongUs.Client.Loader
         {
             UnityVersionHandler.Initialize(2019, 4, 9);
             ModLoader.Instance.IsClient = true;
+            LoadVanillaRegistries();
             StartLoadingAsync().GetAwaiter().GetResult();
+        }
+
+        private void LoadVanillaRegistries()
+        {
+            //Kill distances
+            for (var i = 0; i < Math.Min(OPIJAMILNFD.OKGJOLEBGPG.Count, OPIJAMILNFD.OHDFNBCBJLN.Count); i++)
+            {
+                var key = new RegistryKey("AmongUs", OPIJAMILNFD.OHDFNBCBJLN[i]);
+                var distance = new KillDistance(OPIJAMILNFD.OKGJOLEBGPG[i]) { Key = key };
+                KillDistance.Registry[key] = distance;
+            }
+
+            Registrar<KillDistance>.OnRegister += (key, distance) =>
+            {
+                var newSize = Math.Min(OPIJAMILNFD.OKGJOLEBGPG.Count, OPIJAMILNFD.OHDFNBCBJLN.Count);
+                var distancesArray = new Il2CppStructArray<float>(newSize);
+                var namesArray = new Il2CppStringArray(newSize);
+                
+                for (var i = 0; i < newSize; i++)
+                {
+                    distancesArray[i] = OPIJAMILNFD.OKGJOLEBGPG[i];
+                    namesArray[i] = OPIJAMILNFD.OHDFNBCBJLN[i];
+                }
+
+                distancesArray[newSize - 1] = distance.Value;
+                namesArray[newSize - 1] = distance.Key.Name;
+
+                OPIJAMILNFD.OKGJOLEBGPG = distancesArray;
+                OPIJAMILNFD.OHDFNBCBJLN = namesArray;
+            };
+            
+            //Tasks
+            for (var i = 0; i <= _lastTaskId; i++)
+            {
+                var originalTask = (LJGAMCIMPMO) i;
+                var key = new RegistryKey("AmongUs", originalTask.ToString());
+                var taskType = new TaskType { Key = key };
+                TaskType.Registry[key] = taskType;
+            }
+            
+            Registrar<TaskType>.OnRegister += (key, type) => TaskTypes[type] = ++_lastTaskId;
         }
 
         private async Task StartLoadingAsync()

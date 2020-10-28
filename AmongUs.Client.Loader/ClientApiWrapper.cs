@@ -7,18 +7,13 @@ using LogLevel = AmongUs.Api.LogLevel;
 
 namespace AmongUs.Client.Loader
 {
-    public class ClientApiWrapper : IApiWrapper
+    public class ClientApiWrapper : ApiWrapper
     {
-        private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
-        internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
-
         //TODO probably need a better way to do this, mainly one that doesn't fuck up the object lifetimes
-        public string Language => (ModLoaderPlugin._options?.EKMHEKKICFL?.HFHEGBIOKNE ?? KPOBLKLMOLL.English).ToString();
+        public override string Language => (ModLoaderPlugin._options?.EKMHEKKICFL?.HFHEGBIOKNE ?? KPOBLKLMOLL.English).ToString();
 
-        public ILogger CreateLogger(string name) => new ClientLogger(name);
-
-        public void RegisterTask(TaskType type) => TaskTypes[type] = ++_lastTaskId;
-
+        public override ILogger CreateLogger(string name) => new ClientLogger(name);
+        
         private class ClientLogger : ILogger
         {
             private readonly ManualLogSource _manualLog;
