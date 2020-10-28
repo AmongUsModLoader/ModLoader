@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
         <LangVersion>7.3</LangVersion>
+        <RootNamespace>ModLoaderClient</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -68,11 +69,10 @@
             <HintPath>$(AMONG_US_PATH)BepInEx/unhollowed/UnityEngine.UI.dll</HintPath>
             <Private>False</Private>
         </Reference>
+    </ItemGroup>
 
-        <ProjectReference Include="..\AmongUs\AmongUsModLoader.csproj">
-            <Project>{a964fb9d-5276-4ae8-bf7c-a89f086ae692}</Project>
-            <Name>AmongUsModLoader</Name>
-        </ProjectReference>
+    <ItemGroup>
+      <ProjectReference Include="..\AmongUs\AmongUs.csproj" />
     </ItemGroup>
     
     <Target Name="Copy" AfterTargets="Build">

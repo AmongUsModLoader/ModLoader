@@ -33,7 +33,7 @@ namespace AmongUs.Api
 		/// </summary>
 		public static event Action<IGameLobby, bool> GameStartingEvent;
 		
-		public static event Action<IGameLobby, PlayerControl, IDisconnectReason> PlayerDisconnectedEvent;
+		//public static event Action<IGameLobby, PlayerControl, IDisconnectReason> PlayerDisconnectedEvent;
 		public static event Action<IGameLobby> DisconnectEvent;
 
 		

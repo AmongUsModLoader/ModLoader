@@ -2,7 +2,7 @@ using AmongUs.Api;
 using HarmonyLib;
 using UnityEngine;
 
-namespace AmongUs.Client.Loader
+namespace AmongUs.Client.Loader.Patches
 {
     internal static class ModPatches
     {
@@ -40,7 +40,8 @@ namespace AmongUs.Client.Loader
         [HarmonyPatch(typeof(VersionShower), "Start")]
         private static class VersionShowerPatch
         {
-            public static void Postfix(VersionShower __instance) => MainMenu.ShowVersion(__instance);
+            public static void Postfix(VersionShower __instance) =>
+                __instance.text.Text = MainMenu.ShowVersion(__instance.text.Text);
         }
     }
 }

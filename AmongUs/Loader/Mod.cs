@@ -81,21 +81,23 @@ namespace AmongUs.Loader
                 from resource in _resourceNames.Keys where resource.StartsWith("Resources.Language.")
                 let name = resource.Replace("Resources.Language.", "").Replace(".txt", "")
                 select (name, GetResource("Language/" + name + ".txt"));
-            
+
             foreach (var (key, stream) in language)
             {
                 var dictionary = new Dictionary<string, string>();
-                var reader = new StreamReader(stream);
-                foreach (var languageKey in (await reader.ReadToEndAsync()).Split('\n'))
+                using (var reader = new StreamReader(stream))
                 {
-                    var pair = languageKey.Split('=');
-                    if (pair.Length >= 2)
+                    foreach (var languageKey in (await reader.ReadToEndAsync()).Split('\n'))
                     {
-                        dictionary[pair[0]] = pair[1];
+                        var pair = languageKey.Split('=');
+                        if (pair.Length >= 2)
+                        {
+                            dictionary[pair[0]] = pair[1];
+                        }
                     }
-                }
 
-                LanguageKeys[key] = dictionary;
+                    LanguageKeys[key] = dictionary;
+                }
             }
         }
 

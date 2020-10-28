@@ -9,4 +9,11 @@ namespace AmongUs.Loader
         Server,
         Client,
     }
+
+    public class Side : Attribute
+    {
+        public ModSide ValidSide { get; }
+
+        public Side(ModSide side = ModSide.Common) => ValidSide = side;
+    }
 }

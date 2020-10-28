@@ -9,6 +9,7 @@ namespace AmongUs.Loader.Internal
     
     public interface IApiWrapper
     {
+        [Side(ModSide.Client)]
         string Language { get; }
 
         ILogger CreateLogger(string name);

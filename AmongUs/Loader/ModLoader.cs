@@ -26,7 +26,7 @@ namespace AmongUs.Loader
 
         public override void Load()
         {
-            MainMenu.VersionShowEvent += shower => shower.text.Text += $", {ID} v{Version}\n{Mods.Count} mods loaded.";
+            MainMenu.VersionShowEvent += text => $"{text}, {ID} v{Version}\nMods: {Mods.Count}";
         }
 
         public override bool Unload() => throw new InvalidOperationException($"You can not unload the {ID}.");

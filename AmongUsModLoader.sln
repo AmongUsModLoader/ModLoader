@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs", "AmongUs\AmongUsModLoader.csproj", "{A964FB9D-5276-4AE8-BF7C-A89F086AE692}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs", "AmongUs\AmongUs.csproj", "{A964FB9D-5276-4AE8-BF7C-A89F086AE692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModLoaderClient", "ModLoaderClient\ModLoaderClient.csproj", "{4997969B-539D-4278-B8F3-030F845E707A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Client.Loader", "AmongUs.Client.Loader\AmongUs.Client.Loader.csproj", "{4997969B-539D-4278-B8F3-030F845E707A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
