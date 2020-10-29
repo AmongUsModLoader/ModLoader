@@ -11,14 +11,13 @@ using AmongUs.Loader.Internal;
 using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
-using Il2CppSystem.Linq;
 using UnhollowerBaseLib;
 using UnhollowerBaseLib.Runtime;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace AmongUs.Client.Loader
 {
@@ -29,7 +28,7 @@ namespace AmongUs.Client.Loader
         internal static GameOptionsMenu _options;
         private readonly Harmony _harmony = new Harmony("amongus.modloader");
         private static int _lastTaskId = (int) LJGAMCIMPMO.RebootWifi;
-        internal static readonly Dictionary<TaskType, int> TaskTypes = new Dictionary<TaskType, int>();
+        internal static readonly Dictionary<TaskType, LJGAMCIMPMO> TaskTypes = new Dictionary<TaskType, LJGAMCIMPMO>();
 
         static ModLoaderPlugin()
         {
@@ -81,9 +80,10 @@ namespace AmongUs.Client.Loader
                 var key = new RegistryKey("AmongUs", originalTask.ToString());
                 var taskType = new TaskType { Key = key };
                 TaskType.Registry[key] = taskType;
+                TaskTypes[taskType] = originalTask;
             }
             
-            Registrar<TaskType>.OnRegister += (key, type) => TaskTypes[type] = ++_lastTaskId;
+            Registrar<TaskType>.OnRegister += (key, type) => TaskTypes[type] = (LJGAMCIMPMO) (++_lastTaskId);
         }
 
         private async Task StartLoadingAsync()
@@ -102,7 +102,7 @@ namespace AmongUs.Client.Loader
                 SceneManager.remove_sceneLoaded(action);
                 var gameObject = new GameObject(nameof(ModLoaderPlugin));
                 gameObject.AddComponent<ModLoaderUnityComponent>();
-                UnityEngine.Object.DontDestroyOnLoad(gameObject);
+                Object.DontDestroyOnLoad(gameObject);
             });
             SceneManager.add_sceneLoaded(action);
 
