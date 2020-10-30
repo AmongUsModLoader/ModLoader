@@ -1,3 +1,4 @@
-[submodule "ModLoaderApi"]
+ 
+[submodule "AmongUs"]
 	path = AmongUs
 	url = https://github.com/AmongUsModLoader/ModLoaderApi
