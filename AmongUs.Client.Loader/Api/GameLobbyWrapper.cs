@@ -1,15 +1,32 @@
+using System.Collections.Generic;
 using AmongUs.Api;
 
 namespace AmongUs.Client.Loader.Api
 {
 	public readonly struct GameLobbyWrapper : IGameLobby
 	{
-		private GameStartManager Original { get; }
+		private EDGCHOJDFNC Original { get; }
+
+		//TODO use ObservableCollection
+		public List<IPlayer> Players
+		{
+			get
+			{
+				var list = new List<IPlayer>();
+				
+				foreach (var player in GLHCHLEDNBA.AllPlayerControls)
+				{
+					list.Add(new PlayerWrapper(player));
+				}
+
+				return list;
+			}
+		}
 
 		public float CountDownTimer
 		{
-			get => Original.AKLOKGOIKHP;
-			set => Original.AKLOKGOIKHP = value;
+			get => Original.LHBIJMAFIAG;
+			set => Original.LHBIJMAFIAG = value;
 		}
 
 		public int MinPlayers
@@ -20,14 +37,14 @@ namespace AmongUs.Client.Loader.Api
 
 		public int LastPlayerCount
 		{
-			get => Original.OHFFOOPPAFK;
-			set => Original.OHFFOOPPAFK = value;
+			get => Original.NIKNMFDBPKH;
+			set => Original.NIKNMFDBPKH = value;
 		}
 
 		public StartingState StartState
 		{
-			get => (StartingState) Original.FEFLPKBHACE;
-			set => Original.FEFLPKBHACE = (GameStartManager.PNMJGJHIGIN) value;
+			get => (StartingState) Original.PJANPABCOJM;
+			set => Original.PJANPABCOJM = (EDGCHOJDFNC.HFJIGGOIKPK) value;
 		}
 
 		public string GameStartText
@@ -53,6 +70,6 @@ namespace AmongUs.Client.Loader.Api
 			Original.ResetStartState();
 		}
 
-		public GameLobbyWrapper(GameStartManager original) => Original = original;
+		public GameLobbyWrapper(EDGCHOJDFNC original) => Original = original;
 	}
 }

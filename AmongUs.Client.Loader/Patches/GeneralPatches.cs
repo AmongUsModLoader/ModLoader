@@ -1,4 +1,5 @@
 using AmongUs.Api;
+using AmongUs.Client.Loader.Api;
 using HarmonyLib;
 using UnityEngine;
 
@@ -6,16 +7,11 @@ namespace AmongUs.Client.Loader.Patches
 {
     internal static class ModPatches
     {
-        [HarmonyPatch(typeof(LanguageSetter), "SetLanguage")]
-        private static class LanguageSetPatch
-        {
-            public static void Postfix(ref LanguageButton __0) => Language.Change(__0);
-        }
-
-        [HarmonyPatch(typeof(MeetingHud), "Update")]
+        [HarmonyPatch(typeof(GPOHFPAIEMA), "Update")]
         private static class MeetingHudUpdatePatch
         {
-            public static void Postfix(MeetingHud __instance) => VotingScreen.Update(__instance);
+            public static void Postfix(GPOHFPAIEMA __instance) =>
+                VotingScreen.Update(new VotingScreenWrapper(__instance));
         }
         
         
@@ -31,16 +27,10 @@ namespace AmongUs.Client.Loader.Patches
 
     internal static class LoaderPatches
     {
-        [HarmonyPatch(typeof(MainMenuManager), "Start")]
-        private static class MenuStartPatch
-        {
-            public static void Postfix(MainMenuManager __instance) => MainMenu.ShowMenu(__instance);
-        }
-        
-        [HarmonyPatch(typeof(VersionShower), "Start")]
+        [HarmonyPatch(typeof(CGFOAAMFEFA), "Start")]
         private static class VersionShowerPatch
         {
-            public static void Postfix(VersionShower __instance) =>
+            public static void Postfix(CGFOAAMFEFA __instance) =>
                 __instance.text.Text = MainMenu.ShowVersion(__instance.text.Text);
         }
     }

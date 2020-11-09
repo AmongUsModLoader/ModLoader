@@ -10,7 +10,7 @@ namespace AmongUs.Client.Loader
     public class ClientApiWrapper : ApiWrapper
     {
         //TODO probably need a better way to do this, mainly one that doesn't fuck up the object lifetimes
-        public override string Language => (ModLoaderPlugin._options?.EKMHEKKICFL?.HFHEGBIOKNE ?? KPOBLKLMOLL.English).ToString();
+        public override string Language => (ModLoaderPlugin._options?.BIAIHNECBFM?.CFKEFOJGNGN ?? MEEPDFFHHLC.English).ToString();
 
         public override ILogger CreateLogger(string name) => new ClientLogger(name);
         

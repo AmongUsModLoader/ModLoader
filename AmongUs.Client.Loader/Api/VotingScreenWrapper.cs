@@ -5,7 +5,7 @@ namespace AmongUs.Client.Loader.Api
 {
     public readonly struct VotingScreenWrapper : IVotingScreen
     {
-        private MeetingHud Original { get; }
+        private GPOHFPAIEMA Original { get; }
 
         public string TitleText
         {
@@ -17,10 +17,10 @@ namespace AmongUs.Client.Loader.Api
         {
             get
             {
-                var origin = Original.BEDJEPCINAI;
+                var origin = Original.GOCOEAPLJFA;
                 return new Vector3(origin.x, origin.y, origin.z);
             }
-            set => Original.BEDJEPCINAI = new UnityEngine.Vector3(value.X, value.Y, value.Z);
+            set => Original.GOCOEAPLJFA = new UnityEngine.Vector3(value.X, value.Y, value.Z);
         }
 
         public Vector3 VotePosition
@@ -43,24 +43,28 @@ namespace AmongUs.Client.Loader.Api
             set => Original.VoteButtonOffsets = new UnityEngine.Vector3(value.X, value.Y, value.Z);
         }
 
-        public PlayerVoteArea SkipVoteButton
-        {
-            get => Original.SkipVoteButton;
-            set => Original.SkipVoteButton = value;
-        }
+        public IPlayerVoteState SkipVoteButton => new PlayerVoteStateWrapper(Original.SkipVoteButton);
 
-        public PlayerVoteArea[] PlayerStates
+        public IPlayerVoteState[] PlayerStates
         {
-            get => Original.FALDLDJHDDJ;
-            set => Original.FALDLDJHDDJ = PlayerStates;
+            get
+            {
+                var oldArray = Original.OMJGIAMFODK;
+                var newArray = new IPlayerVoteState[oldArray.Count];
+                for (var index = 0; index < oldArray.Count; index++)
+                {
+                    newArray[index] = new PlayerVoteStateWrapper(oldArray[index]);
+                }
+                return newArray;
+            }
         }
 
         //public GameData.IHEKEPMDGIJ ExiledPlayer { get; set; }
 
         public bool Tied
         {
-            get => Original.CEIGAJCFLEM;
-            set => Original.CEIGAJCFLEM = value;
+            get => Original.GBOFEFNNKCF;
+            set => Original.GBOFEFNNKCF = value;
         }
 
         public string TimerText
@@ -75,6 +79,6 @@ namespace AmongUs.Client.Loader.Api
             set => Original.discussionTimer = value;
         }
 
-        public VotingScreenWrapper(MeetingHud original) => Original = original;
+        public VotingScreenWrapper(GPOHFPAIEMA original) => Original = original;
     }
 }

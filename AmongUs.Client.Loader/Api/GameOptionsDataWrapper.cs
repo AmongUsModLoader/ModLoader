@@ -6,122 +6,140 @@ namespace AmongUs.Client.Loader.Api
 	public readonly struct GameOptionsDataWrapper : ILobbyOptions
 	{
 
-		private OPIJAMILNFD Original { get; }
+		private OEFJGMAEENB Original { get; }
 
 		public int MaxPlayers
 		{
-			get => Original.ALGKPIECFPC;
-			set => Original.ALGKPIECFPC = value;
+			get => Original.PCKBBJFMMFL;
+			set => Original.PCKBBJFMMFL = value;
 		}
 
-		public byte MapId
+		public GameMap Map
 		{
-			get => Original.BFOCEACJOPK;
-			set => Original.BFOCEACJOPK = value;
+			get => ModLoaderPlugin.MapTypes[(DAFPFFMKPJJ.DFCBBBIBKKC) Original.HGMAKPLFANN];
+			set => Original.HGMAKPLFANN = (byte) ModLoaderPlugin.ReverseMapTypes[value];
 		}
 
-		public float PlayerSpeedMod
+		public float PlayerSpeed
 		{
-			get => Original.DAJDLEBMBMB;
-			set => Original.DAJDLEBMBMB = value;
+			get => Original.LOHPLKGPFNA;
+			set => Original.LOHPLKGPFNA = value;
 		}
 
-		public float CrewLightMod
+		public float CrewMateVision
 		{
-			get => Original.LNKCMDOCNBI;
-			set => Original.LNKCMDOCNBI = value;
+			get => Original.FNLABFPPJJM;
+			set => Original.FNLABFPPJJM = value;
 		}
 
-		public float ImposterLightMod
+		public float ImpostorVision
 		{
-			get => Original.NFAOBDJKOPH;
-			set => Original.NFAOBDJKOPH = value;
+			get => Original.PJEHIKCGHMD;
+			set => Original.PJEHIKCGHMD = value;
 		}
 
 		public float KillCooldown
 		{
-			get => Original.HNEKLLKCJOJ;
-			set => Original.HNEKLLKCJOJ = value;
+			get => Original.KDOKPOJFEKB;
+			set => Original.KDOKPOJFEKB = value;
 		}
 
-		public int NumCommonTasks
+		public int CommonTasks
 		{
-			get => Original.LNNGPNHGGDN;
-			set => Original.LNNGPNHGGDN = value;
+			get => Original.OAHKBIHPHGB;
+			set => Original.OAHKBIHPHGB = value;
 		}
 
-		public int NumLongTasks
+		public int LongTasks
 		{
-			get => Original.FFJKPGELKGD;
-			set => Original.FFJKPGELKGD = value;
+			get => Original.LGBIDHFOBCA;
+			set => Original.LGBIDHFOBCA = value;
 		}
 
-		public int NumShortTasks
+		public int ShortTasks
 		{
-			get => Original.OJLANPDBDGG;
-			set => Original.OJLANPDBDGG = value;
+			get => Original.LPJNEJIIFNB;
+			set => Original.LPJNEJIIFNB = value;
 		}
 
-		public int NumEmergencyMeetings
+		public int EmergencyMeetingsAllowed
 		{
-			get => Original.OEBNJBBLHBD;
-			set => Original.OEBNJBBLHBD = value;
+			get => Original.BLCAKAJBHLC;
+			set => Original.BLCAKAJBHLC = value;
 		}
 
-		public int NumImpostors
+		public int EmergencyMeetingCooldown
 		{
-			get => Original.MAONBFOOEPK;
-			set => Original.MAONBFOOEPK = value;
+			get => Original.LIFCGGNFEML;
+			set => Original.LIFCGGNFEML = value;
+		}
+
+		public int ImpostorCount
+		{
+			get => Original.FIEIHPHGJPL;
+			set => Original.FIEIHPHGJPL = value;
 		}
 
 		public bool GhostsDoTasks
 		{
-			get => Original.NNEENFHINBO;
-			set => Original.NNEENFHINBO = value;
+			get => Original.KPMMNAPPMLK;
+			set => Original.KPMMNAPPMLK = value;
 		}
 
 		public int KillDistance
 		{
-			get => Original.MCHMMCDKECO;
-			set => Original.MCHMMCDKECO = value;
+			get => Original.CCIEDBPKKMP;
+			set => Original.CCIEDBPKKMP = value;
 		}
 
 		public int DiscussionTime
 		{
-			get => Original.IECOKEIAEEE;
-			set => Original.IECOKEIAEEE = value;
+			get => Original.PHKOBAMEEGK;
+			set => Original.PHKOBAMEEGK = value;
 		}
 
 		public int VotingTime
 		{
-			get => Original.MMJKMHKEAPI;
-			set => Original.MMJKMHKEAPI = value;
+			get => Original.FAGPOFNMCPK;
+			set => Original.FAGPOFNMCPK = value;
 		}
 
 		public bool ConfirmImpostor
 		{
-			get => Original.BELGPJKBKGA;
-			set => Original.BELGPJKBKGA = value;
+			get => Original.JFAKHFFMHIO;
+			set => Original.JFAKHFFMHIO = value;
 		}
 
 		public bool VisualTasks
 		{
-			get => Original.KPFLIHLKEBI;
-			set => Original.KPFLIHLKEBI = value;
+			get => Original.GMJFJNNICHC;
+			set => Original.GMJFJNNICHC = value;
+		}
+
+		public bool AnonymousVotes
+		{
+			get => Original.IAFJLBELLDA;
+			set => Original.IAFJLBELLDA = value;
+		}
+
+		public TaskBarUpdates TaskBarUpdates
+		{
+			get => (TaskBarUpdates) Original.BNIJDCGPMKO;
+			set => Original.BNIJDCGPMKO = (BNIJDCGPMKO) value;
 		}
 
 		public bool IsDefaults
 		{
-			get => Original.MEIOIAOIBOH;
-			set => Original.MEIOIAOIBOH = value;
+			get => Original.LPMMFCBBPBH;
+			set => Original.LPMMFCBBPBH = value;
 		}
 
-		public StringBuilder Settings
+		public string Settings
 		{
-			get => new StringBuilder(Original.PFPGEKOLAJA.ToString());
-			set => Original.PFPGEKOLAJA = new Il2CppSystem.Text.StringBuilder(value.ToString());
+			get => Original.EJGNHIIMKJO.ToString();
+			set => Original.EJGNHIIMKJO = new Il2CppSystem.Text.StringBuilder(value);
 		}
 
-		public GameOptionsDataWrapper(OPIJAMILNFD original) => Original = original;
+		public GameOptionsDataWrapper(OEFJGMAEENB original) => Original = original;
 	}
 }
