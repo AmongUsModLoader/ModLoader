@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
         <LangVersion>7.3</LangVersion>
-        <RootNamespace>AmongUs.Client.Loader</RootNamespace>
+        <RootNamespace>AmongUs.Client</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -72,12 +72,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AmongUs\AmongUs.csproj" />
+      <ProjectReference Include="..\AmongUs.Api\AmongUs.Api.csproj" />
     </ItemGroup>
     
     <Target Name="Copy" AfterTargets="Build">
         <ItemGroup>
-            <OutputFiles Include="$(OutputPath)AmongUs.dll" />
+            <OutputFiles Include="$(OutputPath)AmongUs.Api.dll" />
             <OutputFiles Include="$(OutputPath)$(AssemblyName).dll" />
         </ItemGroup>
         <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(AMONG_US_PATH)BepInEx/plugins/" Condition="'$(Configuration)' == 'Debug'" />

@@ -1,8 +1,8 @@
 using AmongUs.Api;
-using AmongUs.Client.Loader.Api;
+using AmongUs.Client.Api;
 using HarmonyLib;
 
-namespace AmongUs.Client.Loader.Patches
+namespace AmongUs.Client.Patches
 {
     internal static class PlayerColorPatches
     {

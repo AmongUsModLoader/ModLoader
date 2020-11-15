@@ -3,6 +3,6 @@
         <TargetFramework>net472</TargetFramework>
         <LangVersion>7.3</LangVersion>
         <OutputType>Exe</OutputType>
-        <RootNamespace>AmongUs.Server.Loader</RootNamespace>
+        <RootNamespace>AmongUs.Server</RootNamespace>
     </PropertyGroup>
 </Project>

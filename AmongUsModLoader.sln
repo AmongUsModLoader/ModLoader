@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs", "AmongUs\AmongUs.csproj", "{A964FB9D-5276-4AE8-BF7C-A89F086AE692}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Api", "AmongUs.Api\AmongUs.Api.csproj", "{A964FB9D-5276-4AE8-BF7C-A89F086AE692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Client.Loader", "AmongUs.Client.Loader\AmongUs.Client.Loader.csproj", "{4997969B-539D-4278-B8F3-030F845E707A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Client", "AmongUs.Client\AmongUs.Client.csproj", "{4997969B-539D-4278-B8F3-030F845E707A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Server.Loader", "AmongUs.Server.Loader\AmongUs.Server.Loader.csproj", "{B9FE56F5-17B4-4148-BBA0-16EE15E68234}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Server", "AmongUs.Server\AmongUs.Server.csproj", "{B9FE56F5-17B4-4148-BBA0-16EE15E68234}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

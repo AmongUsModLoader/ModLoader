@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AmongUs.Api;
+using AmongUs.Api.Loader;
+using AmongUs.Api.Loader.Internal;
 using AmongUs.Api.Registry;
-using AmongUs.Client.Loader.Patches;
-using AmongUs.Loader;
-using AmongUs.Loader.Internal;
+using AmongUs.Client.Patches;
 using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
@@ -19,7 +20,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-namespace AmongUs.Client.Loader
+namespace AmongUs.Client
 {
     [BepInPlugin("AUSML", "Client ModLoader", "0.1")]
     [BepInProcess("Among Us.exe")]
@@ -35,7 +36,9 @@ namespace AmongUs.Client.Loader
 
         static ModLoaderPlugin()
         {
-            Assembly.LoadFile(Directory.GetCurrentDirectory() + "\\BepInEx\\plugins\\AmongUs.dll");
+            var dir = Directory.GetCurrentDirectory();
+            Assembly.LoadFile(Directory.GetCurrentDirectory() +
+                              Directory.GetFiles(dir).First(file => file.Contains("AmongUs.Api")));
             ApiWrapper.Instance = new ClientApiWrapper();
         }
 

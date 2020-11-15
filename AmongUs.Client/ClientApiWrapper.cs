@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using AmongUs.Api;
-using AmongUs.Loader.Internal;
+using AmongUs.Api.Loader.Internal;
 using BepInEx.Logging;
 using Logger = BepInEx.Logging.Logger;
 using LogLevel = AmongUs.Api.LogLevel;
 
-namespace AmongUs.Client.Loader
+namespace AmongUs.Client
 {
     public class ClientApiWrapper : ApiWrapper
     {
