@@ -33,6 +33,8 @@ namespace AmongUs.Client
         internal static readonly Dictionary<CANPENMJFOD, TaskType> TaskTypes = new Dictionary<CANPENMJFOD, TaskType>();
         internal static readonly Dictionary<DAFPFFMKPJJ.DFCBBBIBKKC, GameMap> MapTypes = new Dictionary<DAFPFFMKPJJ.DFCBBBIBKKC, GameMap>();
         internal static readonly Dictionary<GameMap, int> ReverseMapTypes = new Dictionary<GameMap, int>();
+        internal static readonly Dictionary<int, KillDistance> KillDistances = new Dictionary<int, KillDistance>();
+        internal static readonly Dictionary<KillDistance, int> ReverseKillDistances = new Dictionary<KillDistance, int>();
 
         static ModLoaderPlugin() => ApiWrapper.Instance = new ClientApiWrapper();
 
@@ -46,6 +48,8 @@ namespace AmongUs.Client
 
         private void LoadVanillaRegistries()
         {
+            LobbyOptionsInitializer.RegisterAll();
+            
             //Kill distances
             Il2CppStructArray<float> OldDistancesArray() => OEFJGMAEENB.JFMGLFCHLKK;
             Il2CppStringArray OldNamesArray() => OEFJGMAEENB.GCBCGFCMMMI;
@@ -54,6 +58,8 @@ namespace AmongUs.Client
             {
                 var key = new RegistryKey("AmongUs", OldNamesArray()[i]);
                 var distance = new KillDistance(OldDistancesArray()[i]) { Key = key };
+                KillDistances[i] = distance;
+                ReverseKillDistances[distance] = i;
                 KillDistance.Registry[key] = distance;
             }
 
@@ -71,6 +77,9 @@ namespace AmongUs.Client
 
                 distancesArray[newSize] = distance.Value;
                 namesArray[newSize] = Language.Translate(key.ModId, key.Name);
+                
+                KillDistances[newSize] = distance;
+                ReverseKillDistances[distance] = newSize;
 
                 OEFJGMAEENB.JFMGLFCHLKK = distancesArray;
                 OEFJGMAEENB.GCBCGFCMMMI = namesArray;

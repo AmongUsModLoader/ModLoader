@@ -69,6 +69,22 @@ namespace AmongUs.Client.Api
 		public GameLobbyWrapper(EDGCHOJDFNC original) => _original = original;
 		
 		public void ResetStartState() => _original.ResetStartState();
-		public T GetOption<T>(LobbyOption<T> option) => ((LobbyOptionInstance<T>) Options[_original][option]).Value;
+
+		public LobbyOptionInstance<T> GetOption<T>(LobbyOption<T> option)
+		{
+			if (!Options.ContainsKey(_original))
+			{
+				Options[_original] = new Dictionary<LobbyOption, LobbyOptionInstance>();
+			}
+
+			var optionInstances = Options[_original];
+
+			if (!optionInstances.ContainsKey(option))
+			{
+				optionInstances[option] = option.Factory(this);
+			}
+			
+			return (LobbyOptionInstance<T>) Options[_original][option];
+		}
 	}
 }

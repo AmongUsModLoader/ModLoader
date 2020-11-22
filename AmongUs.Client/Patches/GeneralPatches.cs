@@ -1,3 +1,4 @@
+using System;
 using AmongUs.Api;
 using AmongUs.Client.Api;
 using HarmonyLib;
@@ -19,7 +20,7 @@ namespace AmongUs.Client.Patches
         [HarmonyPatch(new []{ typeof(uint), typeof(SpriteRenderer)})]
         private static class HackyPatchy
         {
-            public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] SkinData a,[HarmonyArgument(1)] SpriteRenderer b) {
+            public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] SkinData a, [HarmonyArgument(1)] SpriteRenderer b) {
                 System.Console.WriteLine("Ooga booga");
             }
         }*/
