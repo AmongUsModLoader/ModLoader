@@ -33,20 +33,13 @@ namespace AmongUs.Client
         internal static readonly Dictionary<CANPENMJFOD, TaskType> TaskTypes = new Dictionary<CANPENMJFOD, TaskType>();
         internal static readonly Dictionary<DAFPFFMKPJJ.DFCBBBIBKKC, GameMap> MapTypes = new Dictionary<DAFPFFMKPJJ.DFCBBBIBKKC, GameMap>();
         internal static readonly Dictionary<GameMap, int> ReverseMapTypes = new Dictionary<GameMap, int>();
-
-        static ModLoaderPlugin()
-        {
-            var dir = Directory.GetCurrentDirectory();
-            Assembly.LoadFile(dir + Directory.GetFiles(dir).First(file => file.Contains("AmongUs.Api")));
-            ApiWrapper.Instance = new ClientApiWrapper();
-        }
-
+        
         public override void Load()
-        {
-            /*UnityVersionHandler.Initialize(2019, 4, 9);
+        { 
+            UnityVersionHandler.Initialize(2019, 4, 9);
             ModLoader.Instance.IsClient = true;
             LoadVanillaRegistries();
-            StartLoadingAsync().GetAwaiter().GetResult();*/
+            StartLoadingAsync().GetAwaiter().GetResult();
         }
 
         private void LoadVanillaRegistries()
@@ -123,6 +116,7 @@ namespace AmongUs.Client
         {
             var loader = ModLoader.Instance;
             AddPatchType(typeof(LoaderPatches));
+            ApiWrapper.Instance = new ClientApiWrapper();
             await loader.AddMod(loader, loader.GetType().Assembly);
 
             if (!Directory.Exists(ModLoader.ModDirectory)) return;
