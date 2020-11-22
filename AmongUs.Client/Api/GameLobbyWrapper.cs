@@ -5,6 +5,7 @@ namespace AmongUs.Client.Api
 {
 	public readonly struct GameLobbyWrapper : IGameLobby
 	{
+		private static readonly Dictionary<EDGCHOJDFNC, Dictionary<LobbyOption, LobbyOptionInstance>> Options = new Dictionary<EDGCHOJDFNC, Dictionary<LobbyOption, LobbyOptionInstance>>();
 		private readonly EDGCHOJDFNC _original;
 
 		//TODO use ObservableCollection
@@ -64,9 +65,10 @@ namespace AmongUs.Client.Api
 			get => _original.PlayerCounter.Text;
 			set => _original.PlayerCounter.Text = value;
 		}
-
-		public void ResetStartState() => _original.ResetStartState();
-
+		
 		public GameLobbyWrapper(EDGCHOJDFNC original) => _original = original;
+		
+		public void ResetStartState() => _original.ResetStartState();
+		public T GetOption<T>(LobbyOption<T> option) => ((LobbyOptionInstance<T>) Options[_original][option]).Value;
 	}
 }

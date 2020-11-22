@@ -37,17 +37,16 @@ namespace AmongUs.Client
         static ModLoaderPlugin()
         {
             var dir = Directory.GetCurrentDirectory();
-            Assembly.LoadFile(Directory.GetCurrentDirectory() +
-                              Directory.GetFiles(dir).First(file => file.Contains("AmongUs.Api")));
+            Assembly.LoadFile(dir + Directory.GetFiles(dir).First(file => file.Contains("AmongUs.Api")));
             ApiWrapper.Instance = new ClientApiWrapper();
         }
 
         public override void Load()
         {
-            UnityVersionHandler.Initialize(2019, 4, 9);
+            /*UnityVersionHandler.Initialize(2019, 4, 9);
             ModLoader.Instance.IsClient = true;
             LoadVanillaRegistries();
-            StartLoadingAsync().GetAwaiter().GetResult();
+            StartLoadingAsync().GetAwaiter().GetResult();*/
         }
 
         private void LoadVanillaRegistries()
