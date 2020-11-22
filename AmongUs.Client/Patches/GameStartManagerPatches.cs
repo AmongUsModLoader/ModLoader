@@ -19,14 +19,14 @@ namespace AmongUs.Client.Patches
 		private static class GameBeginPatch
 		{
 			public static void Postfix(EDGCHOJDFNC __instance) =>
-				GameLobby.TryStart(new GameLobbyWrapper(__instance));
+				GameLobby.PostTryStartEvent(new GameLobbyWrapper(__instance));
 		}
 
 		[HarmonyPatch(typeof(EDGCHOJDFNC), "ReallyBegin")]
 		private static class ReallyBeginPatch
 		{
 			public static void Postfix(EDGCHOJDFNC __instance, [HarmonyArgument(0)] bool neverShow) =>
-				GameLobby.GameStarting(new GameLobbyWrapper(__instance), neverShow);
+				GameLobby.PostGameStartingEvent(new GameLobbyWrapper(__instance), neverShow);
 		}
 
 		[HarmonyPatch(typeof(EDGCHOJDFNC), "SetStartCounter")]
@@ -43,7 +43,7 @@ namespace AmongUs.Client.Patches
 		private static class LobbyUpdatePatch
 		{
 			public static void Postfix(EDGCHOJDFNC __instance) =>
-				GameLobby.Update(new GameLobbyWrapper(__instance));
+				GameLobby.PostUpdateEvent(new GameLobbyWrapper(__instance));
 		}
 
 		//TODO this patch doesnt work sad emoji
@@ -51,7 +51,7 @@ namespace AmongUs.Client.Patches
 		private static class MakePublicPatch
 		{
 			public static void Postfix(EDGCHOJDFNC __instance) =>
-				GameLobby.MakePublic(new GameLobbyWrapper(__instance));
+				GameLobby.PostMakePublicEvent(new GameLobbyWrapper(__instance));
 		}
 	}
 }

@@ -58,7 +58,11 @@ namespace AmongUs.Client
             public override T Value
             {
                 get => _getter(GLHCHLEDNBA.GameOptions);
-                set => _setter(GLHCHLEDNBA.GameOptions, value);
+                set
+                {
+                    _setter(GLHCHLEDNBA.GameOptions, value);
+                    TriggerSettingsUpdate();
+                }
             }
 
             public LazyOptionInstance(IGameLobby lobby, Func<OEFJGMAEENB, T> getter, Action<OEFJGMAEENB, T> setter) : base(lobby)

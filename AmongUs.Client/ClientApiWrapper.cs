@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using AmongUs.Api;
 using AmongUs.Api.Loader.Internal;
@@ -10,6 +11,12 @@ namespace AmongUs.Client
 {
     public class ClientApiWrapper : ApiWrapper
     {
+        private static readonly SortedDictionary<int, int> MaxImpostors = new SortedDictionary<int, int>()
+        {
+            [0] = 1,
+            [7] = 2,
+            [9] = 3
+        };
         //TODO probably need a better way to do this, mainly one that doesn't fuck up the object lifetimes
         public override string Language => (ModLoaderPlugin._options?.BIAIHNECBFM?.CFKEFOJGNGN ?? MEEPDFFHHLC.English).ToString();
 
@@ -28,6 +35,27 @@ namespace AmongUs.Client
 
             newArray[newArray.Length - 1] = newRegion;
             FOLCACGIEIK.DefaultRegions = newArray;
+        }
+
+        public override void SetMaxImpostors(int playerCount, int maxImpostors)
+        {
+            if (playerCount == 0) playerCount = 1;
+            
+            MaxImpostors[playerCount] = maxImpostors;
+            var size = MaxImpostors.Last().Key;
+            var array = new Il2CppStructArray<int>(size);
+
+            var lastPair = MaxImpostors.First();
+            foreach (var pair in MaxImpostors)
+            {
+                for (var i = lastPair.Key - 1; i < pair.Key; i++)
+                {
+                    array[i] = lastPair.Value;
+                }
+                lastPair = pair;
+            }
+
+            OEFJGMAEENB.ALNGMJFMDHA = array;
         }
 
         private class ClientLogger : ILogger
