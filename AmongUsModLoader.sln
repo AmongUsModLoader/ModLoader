@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Client", "AmongUs.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.Server", "AmongUs.Server\AmongUs.Server.csproj", "{B9FE56F5-17B4-4148-BBA0-16EE15E68234}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmongUs.BootStrap", "AmongUs.BootStrap\AmongUs.BootStrap.csproj", "{5B2FD237-AAB4-4586-978E-F9743E55BE38}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +24,5 @@ Global
 		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9FE56F5-17B4-4148-BBA0-16EE15E68234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B2FD237-AAB4-4586-978E-F9743E55BE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B2FD237-AAB4-4586-978E-F9743E55BE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B2FD237-AAB4-4586-978E-F9743E55BE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B2FD237-AAB4-4586-978E-F9743E55BE38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
